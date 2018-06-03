@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Login.LoadingPage">
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="#06a4cc">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Frame CornerRadius="36" 
+               Margin="0" 
+               Padding="0" 
+               IsClippedToBounds="true"
+               Grid.Row="1"
+               Grid.Column="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+           
+            <Image  Source="MattLoading.png" 
+                    Grid.Row="1" 
+                    Grid.Column="1"/>
+        </Frame>
+           
+        <Label 
+               Text = "Loading"
+               Grid.Row="1" 
+               Grid.Column="0" 
+               Grid.ColumnSpan="3"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="End"
+               FontFamily="Boulder"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="White"/>
+    </Grid>
+    </ContentPage.Content>
+
+
+</ContentPage>
