@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Login.LoginPage"
+             Padding="0,20,0,0">
+
+    <ContentPage.Content>
+        
+<!--    <StackLayout Spacing="20" Padding="15">
+            <Label Text="Email Address"/>
+            <Entry Text="" FontSize="Small" x:Name="Email" />
+            <Label Text="Handle"/>
+            <Entry Text="" FontSize="Small" x:Name="Handle" />
+            <Label Text="Password"/>
+            <Entry Text="" FontSize="Small" x:Name="Password" />
+            <Button Text="Press me!"
+                BorderRadius="17"
+                BorderWidth="6"
+                BorderColor="Black"
+                HorizontalOptions="Center"
+                />
+
+        </StackLayout>-->
+       <Grid BackgroundColor="#06a4cc">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.7*" />
+        </Grid.ColumnDefinitions>
+
+        <!--<Frame CornerRadius="36" 
+               Margin="0" 
+               Padding="0" 
+               IsClippedToBounds="true"
+               Grid.Row="1"
+               Grid.Column="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+           
+            <Image  Source="" 
+                    Grid.Row="1" 
+                    Grid.Column="1"/>
+        </Frame>-->
+           
+           <Label 
+               Text = "Logo Here"
+               Grid.Row="0" 
+               Grid.Column="2" 
+               Grid.ColumnSpan="3"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="End"
+               FontFamily="Boulder"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="White"/>
+
+           <Entry Placeholder="Enter email address"                 
+                  FontFamily="Boulder"
+                  FontSize="Medium" 
+                  HorizontalTextAlignment="Center"
+                  x:Name="EmailField" 
+                  Grid.Row="2" 
+                  Grid.Column="2"
+                  Grid.ColumnSpan="3"/>
+           <Entry Placeholder="Enter password"
+                  FontFamily="Boulder"
+                  FontSize="Medium" 
+                  HorizontalTextAlignment="Center"
+                  x:Name="PasswordField"
+                  Grid.Row="3" 
+                  Grid.Column="2" 
+                  Grid.ColumnSpan="3"
+                  IsPassword="true"/>
+           <Entry Placeholder="Enter handle"
+                  FontFamily="Boulder"             
+                  FontSize="Medium"
+                  HorizontalTextAlignment="Center"
+                  x:Name="HandleField" 
+                  Grid.Row="4" 
+                  Grid.Column="2"
+                  Grid.ColumnSpan="3"/>
+
+            <Button Text="Login"
+                BackgroundColor="White"
+                Font="Medium"
+                Clicked="Handle_Clicked"
+                Grid.Row="6" 
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="#06a4cc"/>
+
+            <Button Text="Register"
+                BackgroundColor="White"
+                Font="Medium"
+                Clicked="Handle_Clicked_1"
+                Grid.Row="6" 
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                FontFamily="Boulder"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="#06a4cc"/>
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>
