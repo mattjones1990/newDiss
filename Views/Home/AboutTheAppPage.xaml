@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="Dissertation.Views.Home.AboutTheAppPage"
+    BackgroundColor="#06a4cc">
+
+    <Button Text="Home" 
+            VerticalOptions="Start"
+            HorizontalOptions="Start"
+            Clicked="Back_Click"
+            BackgroundColor="White"
+            Font="Medium"
+            FontFamily="Boulder"
+            FontSize="18"
+            FontAttributes="Bold"
+            TextColor="#06a4cc">
+    </Button>
+
+    <!--Add comment section and button to submit to database audit table. Enables
+    general queries about the app.-->
+    
+</ContentPage>

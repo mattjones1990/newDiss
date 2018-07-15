@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Workout.AddWorkoutPage"
+             Title="Add Workout">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#06a4cc">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.7*" />
+        </Grid.ColumnDefinitions>
+
+        <!--<Frame CornerRadius="36" 
+               Margin="0" 
+               Padding="0" 
+               IsClippedToBounds="true"
+               Grid.Row="1"
+               Grid.Column="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+           
+            <Image  Source="" 
+                    Grid.Row="1" 
+                    Grid.Column="1"/>
+        </Frame>-->
+           
+           <Label 
+               Text = "New Workout Details"
+               Grid.Row="0" 
+               Grid.Column="2" 
+               Grid.ColumnSpan="3"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="End"
+               FontFamily="Boulder"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="White"/>
+
+<!--           <Entry Placeholder="Workout Date"                 
+                  FontFamily="Boulder"
+                  FontSize="Medium" 
+                  HorizontalTextAlignment="Center"
+                  x:Name="EmailField" 
+                  Grid.Row="2" 
+                  Grid.Column="2"
+                  Grid.ColumnSpan="3"/>-->
+
+           <DatePicker Format="D"
+                       x:Name="DatePicker"
+                       Grid.Row="2" 
+                       Grid.Column="2" 
+                       Grid.ColumnSpan="3"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       FontFamily="Boulder"
+
+                       />
+            
+           <Entry Placeholder="Location"
+                  FontFamily="Boulder"
+                  FontSize="Medium" 
+                  HorizontalTextAlignment="Left"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  x:Name="LocationField"
+                  Grid.Row="3" 
+                  Grid.Column="2" 
+                  Grid.ColumnSpan="3"
+                  IsPassword="false"/>
+
+        <Picker x:Name="MuscleGroupPicker1"
+                Title="Primary Muscle Group"
+                
+                FontFamily="Boulder" 
+                FontSize="Medium"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="4" 
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                >
+            <Picker.Items>
+                <x:String>Legs (do it!)</x:String> 
+                <x:String>Chest</x:String>
+                <x:String>Shoulders</x:String> 
+                <x:String>Back</x:String>
+                <x:String>I don't need help!</x:String>
+            </Picker.Items>
+        </Picker> 
+
+        <Picker x:Name="MuscleGroupPicker2"
+                Title="Secondary Muscle Group"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="5" 
+                Grid.Column="2"
+                Grid.ColumnSpan="3">
+            <Picker.Items>
+                <x:String>Legs (do it!)</x:String> 
+                <x:String>Chest</x:String>
+                <x:String>Shoulders</x:String> 
+                <x:String>Back</x:String>
+                <x:String>None</x:String>
+            </Picker.Items>
+        </Picker> 
+
+
+
+
+
+
+            
+<!--           <Entry Placeholder="Primary Muscle Group*"
+                  FontFamily="Boulder"             
+                  FontSize="Medium"
+                  HorizontalTextAlignment="Center"
+                  x:Name="MuscleGroupField" 
+                  Grid.Row="4" 
+                  Grid.Column="2"
+                  Grid.ColumnSpan="3"/>-->
+
+            <Button Text="Add Workout"
+                BackgroundColor="White"
+                Font="Medium"
+                Grid.Row="7" 
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="#06a4cc"
+                Clicked="Handle_Clicked"/>
+
+
+            <Label 
+               Text = "*selecting a primary/secondary muscle group will allow the app to suggest what weight/reps you should be completing for your compound lifts."
+               Grid.Row="8" 
+               Grid.Column="1" 
+               Grid.ColumnSpan="5"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="End"
+               FontFamily="Boulder"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="White"/>
+
+            
+<!--            <Button Text="Register"
+                BackgroundColor="White"
+                Font="Medium"
+                Grid.Row="6" 
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                FontFamily="Boulder"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="#06a4cc"/>-->
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -56,7 +56,7 @@
                     Grid.Column="1"/>
         </Frame>-->
            
-      <Label 
+           <Label 
                Text = "Logo Here"
                Grid.Row="0" 
                Grid.Column="2" 
@@ -72,7 +72,7 @@
                   FontFamily="Boulder"
                   FontSize="Medium" 
                   HorizontalTextAlignment="Center"
-                  x:Name="EmailField1" 
+                  x:Name="EmailField" 
                   Grid.Row="2" 
                   Grid.Column="2"
                   Grid.ColumnSpan="3"/>
@@ -80,15 +80,16 @@
                   FontFamily="Boulder"
                   FontSize="Medium" 
                   HorizontalTextAlignment="Center"
-                  x:Name="PasswordField1"
+                  x:Name="PasswordField"
                   Grid.Row="3" 
                   Grid.Column="2" 
-                  Grid.ColumnSpan="3"/>
+                  Grid.ColumnSpan="3"
+                  IsPassword="true"/>
            <Entry Placeholder="Enter handle"
                   FontFamily="Boulder"             
                   FontSize="Medium"
                   HorizontalTextAlignment="Center"
-                  x:Name="HandleField1" 
+                  x:Name="HandleField" 
                   Grid.Row="4" 
                   Grid.Column="2"
                   Grid.ColumnSpan="3"/>
@@ -96,8 +97,6 @@
             <Button Text="Login"
                 BackgroundColor="White"
                 Font="Medium"
-                BorderColor="Gray"
-                BorderWidth="1"
                 Clicked="Handle_Clicked"
                 Grid.Row="6" 
                 Grid.Column="1"
@@ -108,8 +107,6 @@
 
             <Button Text="Register"
                 BackgroundColor="White"
-                BorderColor="Gray"
-                BorderWidth="1"
                 Font="Medium"
                 Clicked="Handle_Clicked_1"
                 Grid.Row="6" 

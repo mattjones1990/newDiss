@@ -20,43 +20,43 @@ namespace Dissertation.Views.Login
             InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+            
         }       
 
         //Login
 		void Handle_Clicked(object sender, System.EventArgs e)
 		{
-			
-			if (CheckFields(EmailField1.Text, PasswordField1.Text, HandleField1.Text))
+			if (CheckFields(EmailField.Text, PasswordField.Text, HandleField.Text))
 			{
-				CheckLogin(EmailField1.Text, PasswordField1.Text, HandleField1.Text, "CheckIfSqliteInAzure");                
+				CheckLogin(EmailField.Text, PasswordField.Text, HandleField.Text, "CheckIfSqliteInAzure");                
 			}
 		}
         
         //Register
 		void Handle_Clicked_1(object sender, System.EventArgs e)
 		{
-			if (CheckFields(EmailField1.Text, PasswordField1.Text, HandleField1.Text))
+			if (CheckFields(EmailField.Text, PasswordField.Text, HandleField.Text))
 			{
-				CheckLogin(EmailField1.Text, PasswordField1.Text, HandleField1.Text, "CheckIfSqliteInAzureForDisclaimer");
+				CheckLogin(EmailField.Text, PasswordField.Text, HandleField.Text, "CheckIfSqliteInAzureForDisclaimer");
             }
 		}
 
 		public bool CheckFields(string email, string password, string handle)
 		{
 			bool x = false;
-			if (String.IsNullOrEmpty(email))
+			if (String.IsNullOrEmpty(email) || String.IsNullOrWhiteSpace(email) || !email.Contains("."))
 			{
-				EmailField1.BackgroundColor = Color.LightGray;
+				EmailField.BackgroundColor = Color.LightGray;
 				DisplayAlert("Invalid Email Address", "You cannot register without a valid email address.", "Ok");
 			}
 			else if (String.IsNullOrEmpty(password) || password.Length < 8)
 			{
-				PasswordField1.BackgroundColor = Color.LightGray;
+				PasswordField.BackgroundColor = Color.LightGray;
 				DisplayAlert("Invalid Password", "Your password must be more than 7 characters long.", "Ok");
 			}
 			else if (String.IsNullOrEmpty(handle) ||handle.Length < 5)
 			{
-				HandleField1.BackgroundColor = Color.LightGray;
+				HandleField.BackgroundColor = Color.LightGray;
 				DisplayAlert("Invalid Handle", "Your handle must be more than 4 characters long.", "Ok");
 			}
 			else
@@ -150,7 +150,8 @@ namespace Dissertation.Views.Login
                     {
                         Email = result.Email,
                         Handle = result.Handle,
-                        Password = result.Password
+                        Password = result.Password,
+						UserGuid = result.UserGuid //assign new guid to user
                     };
 
                     await _connection.InsertAsync(newUser);

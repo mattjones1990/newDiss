@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Workout.ViewExercisesPage"
+             Title="Exercises">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Clicked="Handle_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ListView x:Name="ListViewExercises"
+                  ItemTapped="Handle_ItemTapped">
+            <ListView.ItemTemplate>  
+                <DataTemplate>  
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">  
+                            <Label Text = "{Binding Exercise}"></Label>
+                            <Label Text = "{Binding MuscleGroup}"></Label>
+                          
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                                <Label Text="{Binding Sets}"></Label>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>  
+            </ListView.ItemTemplate> 
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

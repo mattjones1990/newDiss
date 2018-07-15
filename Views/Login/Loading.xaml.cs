@@ -30,16 +30,83 @@ namespace Dissertation.Views.Login
         {
             //Check for valid internet connection
             await NetConnection();
-            //Create the table if it doesnt exist
+			//await CreateBlankUserRecord();
+			//Create the table if it doesnt exist
+            
+			await _connection.DropTableAsync<Models.Persistence.Workout>();
+
+
+			//await _connection.DropTableAsync<ExerciseName>();
+			//await _connection.DropTableAsync<Models.Persistence.Workout>();
+			//await _connection.DropTableAsync<Set>();
+			//await _connection.DropTableAsync<Exercise>();
+            
             await _connection.CreateTableAsync<UsersCredentials>();
+			await _connection.CreateTableAsync<Models.Persistence.Workout>();
+			await _connection.CreateTableAsync<Exercise>();
+			//await _connection.CreateTableAsync<ExerciseGroup>();
+			await _connection.CreateTableAsync<ExerciseName>();
+			await _connection.CreateTableAsync<Set>();
+            
+            //add 'static' data
+			await PopulateTablesWithData();
+
+            
+
+
+
             //await CreateBlankUserRecord();
+
             //Get the records
             var user = await _connection.Table<UsersCredentials>().ToListAsync();
             var userCount = user.Count();
+
+            //tests
+			int testOne = 1;
+            if (testOne > 0)
+			{
+                //var exerciseGroup = await _connection.Table<ExerciseGroup>().ToListAsync();
+                //var exerciseGroupCount = exerciseGroup.Count();
+
+    //            var exerciseName = await _connection.Table<ExerciseName>().ToListAsync();
+    //            var exerciseNameCount = exerciseName.Count();
+                
+				//var workout1 = new Models.Persistence.Workout { 
+				//	WorkoutDate = DateTime.Now, 
+				//	Location = "Leicester", 
+				//	Completed = true };
+
+				//var workout2 = new Models.Persistence.Workout
+    //            {
+    //                WorkoutDate = DateTime.Now,
+    //                Location = "London",
+    //                Completed = true
+    //            };
+
+				//await _connection.InsertAsync(workout1);
+				//await _connection.InsertAsync(workout2);
+
+			}
+
+			//public class Workout
+        //{
+            //[PrimaryKey, AutoIncrement]
+            //public int Id { get; set; }
+            //public Guid UserGuid { get; set; }
+            //public DateTime WorkoutDate { get; set; }
+            //[MaxLength(255)]
+            //public string Location { get; set; }
+            //public bool Completed { get; set; }
+
+
+
+
             //await CreateBlankUserRecord();
             await DatabaseChecks(userCount, user);
             base.OnAppearing();
         }
+
+
 
 		private async Task DatabaseChecks(int userCount, List<UsersCredentials> user)
         {
@@ -95,7 +162,7 @@ namespace Dissertation.Views.Login
                 //If they match, go to home screen
                 if (result.Worked == true)
                 {
-                    await Navigation.PushAsync(new Views.Home.HomePage());
+					await Navigation.PushAsync(new Views.Home.HomePage());
                 }
                 else
                 {
@@ -127,6 +194,72 @@ namespace Dissertation.Views.Login
             };
 
             await _connection.InsertAsync(newUser);
+        }
+
+		private async Task PopulateTablesWithData()
+        {
+            //await _connection.ExecuteAsync("DELETE FROM ExerciseGroup");
+            //var exerciseGroup1 = new ExerciseGroup { ExerciseGroupName = "Upper Body" }; //maybe remove these two
+            //var exerciseGroup2 = new ExerciseGroup { ExerciseGroupName = "Lower Body" };
+            //var exerciseGroup3 = new ExerciseGroup { ExerciseGroupName = "Legs" };
+            //var exerciseGroup4 = new ExerciseGroup { ExerciseGroupName = "Chest" };
+            //var exerciseGroup5 = new ExerciseGroup { ExerciseGroupName = "Back" };
+            //var exerciseGroup6 = new ExerciseGroup { ExerciseGroupName = "Shoulders" };
+            //var exerciseGroup7 = new ExerciseGroup { ExerciseGroupName = "Core" };
+            //var exerciseGroup8 = new ExerciseGroup { ExerciseGroupName = "Full Body" };
+            //var exerciseGroup9 = new ExerciseGroup { ExerciseGroupName = "Arms" };
+            //var exerciseGroup10 = new ExerciseGroup { ExerciseGroupName = "Cardio" };
+
+            //await _connection.InsertAsync(exerciseGroup1);
+            //await _connection.InsertAsync(exerciseGroup2);
+            //await _connection.InsertAsync(exerciseGroup3);
+            //await _connection.InsertAsync(exerciseGroup4);
+            //await _connection.InsertAsync(exerciseGroup5);
+            //await _connection.InsertAsync(exerciseGroup6);
+            //await _connection.InsertAsync(exerciseGroup7);
+            //await _connection.InsertAsync(exerciseGroup8);
+            //await _connection.InsertAsync(exerciseGroup9);
+            //await _connection.InsertAsync(exerciseGroup10);
+
+
+   //         await _connection.ExecuteAsync("DELETE FROM ExerciseName");
+   //         var exerciseName1 = new ExerciseName { ExerciseNameString = "Bench Press", ExerciseGroupId = 4, ExerciseMuscleGroup = "Chest" };
+			//var exerciseName2 = new ExerciseName { ExerciseNameString = "Squat", ExerciseGroupId = 3,ExerciseMuscleGroup = "Chest" };
+			//var exerciseName3 = new ExerciseName { ExerciseNameString = "Db Shoulder Press", ExerciseGroupId = 6,ExerciseMuscleGroup = "Chest" };
+			//var exerciseName4 = new ExerciseName { ExerciseNameString = "Deadlift", ExerciseGroupId = 5,ExerciseMuscleGroup = "Chest" };
+
+            // fill in later.
+            //var exerciseName5 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId =  };
+            //var exerciseName6 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId =  };
+            //var exerciseName7 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId =  };
+            //var exerciseName8 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId =  };
+            //var exerciseName9 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId =  };
+            //var exerciseName10 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId = };
+            //var exerciseName11 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId = };
+
+   //         await _connection.InsertAsync(exerciseName1);
+   //         await _connection.InsertAsync(exerciseName2);
+   //         await _connection.InsertAsync(exerciseName3);
+   //         await _connection.InsertAsync(exerciseName4);
+
+			//await _connection.ExecuteAsync("DELETE FROM Exercise");
+   //         var exercise1 = new Exercise { WorkoutId = 1, ExerciseNameId = 1 };
+			//var exercise2 = new Exercise { WorkoutId = 1, ExerciseNameId = 2 };         
+			//var exercise3 = new Exercise { WorkoutId = 1, ExerciseNameId = 3 };
+
+			//await _connection.InsertAsync(exercise1);
+			//await _connection.InsertAsync(exercise2);
+			//await _connection.InsertAsync(exercise3);
+
+			//var set1 = new Set { ExerciseId = 1, Reps = 8, TimeOfSet = DateTime.Now, Weight = 60 };
+			//var set2 = new Set { ExerciseId = 1, Reps = 6, TimeOfSet = DateTime.Now, Weight = 70 };
+			//var set3 = new Set { ExerciseId = 1, Reps = 4, TimeOfSet = DateTime.Now, Weight = 80 };
+			//var set4 = new Set { ExerciseId = 1, Reps = 2, TimeOfSet = DateTime.Now, Weight = 90 };
+
+			//await _connection.InsertAsync(set1);
+			//await _connection.InsertAsync(set2);
+			//await _connection.InsertAsync(set3);
+			//await _connection.InsertAsync(set4);
         }
 
         private async Task NetConnection()

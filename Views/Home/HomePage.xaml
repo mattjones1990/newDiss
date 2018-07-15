@@ -1,10 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="Dissertation.Views.Home.HomePage">
-    <ContentPage.Content>
+             x:Class="Dissertation.Views.Home.HomePage"
+             Padding="0,20,0,0">
 
-        <Label Text="HomePage" VerticalTextAlignment="Center"
-           HorizontalTextAlignment="Center"></Label>
-    </ContentPage.Content>
+ <ContentPage.Content>
+    <Grid BackgroundColor="#06a4cc"
+          ColumnSpacing="1"
+          RowSpacing="1">
+           
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Text="Settings"
+                BackgroundColor="White"
+                Grid.Row="1"
+                Grid.Column="3"
+                Grid.ColumnSpan="1"
+                Clicked="Settings_Clicked"></Button>
+
+        <Button Text="View Workouts"
+                BackgroundColor="White"
+                FontSize="Small"
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="1"
+                Clicked="ViewWorkouts_Click"
+                ></Button>
+            
+        <Button Text="New Workout"
+                BackgroundColor="White"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="1"
+                Clicked="NewWorkout_Clicked"
+                ></Button>
+
+        <Button Text="Profile"
+                BackgroundColor="White"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="1"
+                ></Button>
+            
+        
+    </Grid>
+
+      </ContentPage.Content>
+   <!-- <Button Text="Homepage Logout Test" 
+            VerticalOptions="Start"
+            HorizontalOptions="Center"
+            Clicked="Logout_Click">
+    </Button>
+
+    <Button Text="About the App" 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="About_Click">
+    </Button>
+
+    <Button Text="View Workouts" 
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Clicked="ViewWorkouts_Click">
+    </Button>-->
+        
+<!--    <Label Text="HomePage" VerticalTextAlignment="Center"
+           HorizontalTextAlignment="Center"></Label>-->
+   
 </ContentPage>

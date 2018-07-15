@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Workout.ViewSetsPage"
+             Title="Sets"
+             >
+    <ContentPage.Content>
+        <ListView x:Name="setList"
+                  >
+            <ListView.ItemTemplate>  
+                <DataTemplate>  
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">  
+                            <Label Text = "{Binding SetNumber}"></Label>
+                            <Label Text = "{Binding Weight, 
+                            StringFormat='Weight: {0}'}"></Label>
+                            <Label Text = "{Binding Set, 
+                            StringFormat='Set: {0}'}"></Label>
+                          
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                                <Label Text="Test"></Label>
+                            </StackLayout>
+                            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>  
+            </ListView.ItemTemplate> 
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
