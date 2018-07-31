@@ -4,12 +4,29 @@
              x:Class="Dissertation.Views.Workout.ViewSetsPage"
              Title="Sets"
              >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Clicked="Handle_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <ListView x:Name="setList"
-                  >
+        <ListView x:Name="setList">
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      Clicked="Handle_Clicked_1"                                    
+                                      IsDestructive="true"
+                                      CommandParameter="{Binding .}">                              
+                            </MenuItem>
+                            <MenuItem Text="Edit"
+                                      Clicked="Handle_Clicked_2"                                    
+                                      IsDestructive="false"
+                                      CommandParameter="{Binding .}">                              
+                            </MenuItem>
+                        </ViewCell.ContextActions>
+                        
                         <StackLayout Orientation="Horizontal">  
                             <Label Text = "{Binding SetNumber}"></Label>
                             <Label Text = "{Binding Weight, 

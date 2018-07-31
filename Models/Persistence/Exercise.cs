@@ -10,7 +10,7 @@ namespace Dissertation.Models.Persistence
 		public int WorkoutId { get; set; }
 		//public int ExerciseGroupId { get; set; }
 		public int ExerciseNameId { get; set; }
-        
+        public DateTime DateOfExercise { get; set; }
         //public Exercise()
         //{
         //}

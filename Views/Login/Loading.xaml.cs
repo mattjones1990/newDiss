@@ -34,12 +34,12 @@ namespace Dissertation.Views.Login
 			//Create the table if it doesnt exist
             
 			await _connection.DropTableAsync<Models.Persistence.Workout>();
+			await _connection.DropTableAsync<Set>();
+			await _connection.DropTableAsync<Exercise>();
 
 
-			//await _connection.DropTableAsync<ExerciseName>();
-			//await _connection.DropTableAsync<Models.Persistence.Workout>();
-			//await _connection.DropTableAsync<Set>();
-			//await _connection.DropTableAsync<Exercise>();
+            await _connection.DropTableAsync<ExerciseName>();
+            //await _connection.DropTableAsync<Models.Persistence.Workout>();
             
             await _connection.CreateTableAsync<UsersCredentials>();
 			await _connection.CreateTableAsync<Models.Persistence.Workout>();
@@ -222,11 +222,11 @@ namespace Dissertation.Views.Login
             //await _connection.InsertAsync(exerciseGroup10);
 
 
-   //         await _connection.ExecuteAsync("DELETE FROM ExerciseName");
-   //         var exerciseName1 = new ExerciseName { ExerciseNameString = "Bench Press", ExerciseGroupId = 4, ExerciseMuscleGroup = "Chest" };
-			//var exerciseName2 = new ExerciseName { ExerciseNameString = "Squat", ExerciseGroupId = 3,ExerciseMuscleGroup = "Chest" };
-			//var exerciseName3 = new ExerciseName { ExerciseNameString = "Db Shoulder Press", ExerciseGroupId = 6,ExerciseMuscleGroup = "Chest" };
-			//var exerciseName4 = new ExerciseName { ExerciseNameString = "Deadlift", ExerciseGroupId = 5,ExerciseMuscleGroup = "Chest" };
+            await _connection.ExecuteAsync("DELETE FROM ExerciseName");
+            var exerciseName1 = new ExerciseName { ExerciseNameString = "Bench Press", ExerciseGroupId = 4, ExerciseMuscleGroup = "Chest" };
+			var exerciseName2 = new ExerciseName { ExerciseNameString = "Squat", ExerciseGroupId = 3,ExerciseMuscleGroup = "Leg" };
+			var exerciseName3 = new ExerciseName { ExerciseNameString = "Db Shoulder Press", ExerciseGroupId = 6,ExerciseMuscleGroup = "Shoulder" };
+			var exerciseName4 = new ExerciseName { ExerciseNameString = "Deadlift", ExerciseGroupId = 5,ExerciseMuscleGroup = "Back" };
 
             // fill in later.
             //var exerciseName5 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId =  };
@@ -237,24 +237,26 @@ namespace Dissertation.Views.Login
             //var exerciseName10 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId = };
             //var exerciseName11 = new ExerciseName { ExerciseNameString = "", ExerciseGroupId = };
 
-   //         await _connection.InsertAsync(exerciseName1);
-   //         await _connection.InsertAsync(exerciseName2);
-   //         await _connection.InsertAsync(exerciseName3);
-   //         await _connection.InsertAsync(exerciseName4);
+            await _connection.InsertAsync(exerciseName1);
+            await _connection.InsertAsync(exerciseName2);
+            await _connection.InsertAsync(exerciseName3);
+            await _connection.InsertAsync(exerciseName4);
 
-			//await _connection.ExecuteAsync("DELETE FROM Exercise");
-   //         var exercise1 = new Exercise { WorkoutId = 1, ExerciseNameId = 1 };
-			//var exercise2 = new Exercise { WorkoutId = 1, ExerciseNameId = 2 };         
-			//var exercise3 = new Exercise { WorkoutId = 1, ExerciseNameId = 3 };
+			////await _connection.ExecuteAsync("DELETE FROM Exercise");
+			//var exercise1 = new Exercise { WorkoutId = 1, ExerciseNameId = 1, DateOfExercise = DateTime.Now.AddDays(-10) };
+			//var exercise2 = new Exercise { WorkoutId = 1, ExerciseNameId = 1, DateOfExercise = DateTime.Now.AddDays(-10) };
+			//var exercise3 = new Exercise { WorkoutId = 1, ExerciseNameId = 1, DateOfExercise = DateTime.Now.AddDays(-10) };
+			////var exercise2 = new Exercise { WorkoutId = 1, ExerciseNameId = 2 };         
+			////var exercise3 = new Exercise { WorkoutId = 1, ExerciseNameId = 3 };
 
 			//await _connection.InsertAsync(exercise1);
 			//await _connection.InsertAsync(exercise2);
 			//await _connection.InsertAsync(exercise3);
 
-			//var set1 = new Set { ExerciseId = 1, Reps = 8, TimeOfSet = DateTime.Now, Weight = 60 };
-			//var set2 = new Set { ExerciseId = 1, Reps = 6, TimeOfSet = DateTime.Now, Weight = 70 };
-			//var set3 = new Set { ExerciseId = 1, Reps = 4, TimeOfSet = DateTime.Now, Weight = 80 };
-			//var set4 = new Set { ExerciseId = 1, Reps = 2, TimeOfSet = DateTime.Now, Weight = 90 };
+			//var set1 = new Set { ExerciseId = 1, Reps = 8, TimeOfSet = DateTime.Now.AddDays(-10), Weight = 60 };
+			//var set2 = new Set { ExerciseId = 75, Reps = 6, TimeOfSet = DateTime.Now.AddDays(-10), Weight = 71 };
+			//var set3 = new Set { ExerciseId = 75, Reps = 4, TimeOfSet = DateTime.Now.AddDays(-10), Weight = 80 };
+			//var set4 = new Set { ExerciseId = 75, Reps = 2, TimeOfSet = DateTime.Now.AddDays(-10), Weight = 126 };
 
 			//await _connection.InsertAsync(set1);
 			//await _connection.InsertAsync(set2);

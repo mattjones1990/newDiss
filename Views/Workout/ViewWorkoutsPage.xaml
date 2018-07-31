@@ -10,13 +10,30 @@
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      Clicked="Handle_Clicked"                                    
+                                      IsDestructive="true"
+                                      CommandParameter="{Binding .}">                              
+                            </MenuItem>
+
+                            <MenuItem Text="Edit"
+                                      Clicked="Handle_Clicked_1"                                    
+                                      IsDestructive="false"
+                                      CommandParameter="{Binding .}">                              
+                            </MenuItem>
+                        </ViewCell.ContextActions>
+                        
                         <StackLayout Orientation="Horizontal">  
-                            <Label Text = "{Binding WorkoutDate}"></Label>
-                            <Label Text = "{Binding MuscleGroup}"></Label>
-                          
-                            <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                            <Label Text ="{Binding WorkoutDate}"></Label>
+                            <Label Text ="{Binding MuscleGroups}"></Label>
+                            <Label Text ="testttttt"></Label>
+                            <!--<Label Text="{Binding MuscleGroups}"></Label>-->
+<!--                            <StackLayout Orientation="Vertical" HorizontalOptions="End">
                                 <Label Text="Test"></Label>
-                            </StackLayout>
+
+                                <Label Text="{Binding MuscleGroups}"></Label>
+                            </StackLayout>-->
                             
                         </StackLayout>
                     </ViewCell>

@@ -5,6 +5,7 @@ using Dissertation.Models;
 using Dissertation.Models.Persistence;
 using SQLite;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Dissertation.Views.Workout
 {
@@ -20,7 +21,8 @@ namespace Dissertation.Views.Workout
             InitializeComponent();
         }
 
-		protected override async void OnAppearing() {
+		protected override async void OnAppearing() 
+		{
 
 			List<SetList> ListOfSets = new List<SetList>();
 			var sets = await _connection.Table<Models.Persistence.Set>().ToListAsync();
@@ -38,6 +40,7 @@ namespace Dissertation.Views.Workout
 			{
 				SetList newSetList = new SetList();
 				newSetList.ExerciseId = s.ExerciseId;
+				newSetList.Id = s.Id;
 				newSetList.TimeOfSet = s.TimeOfSet;
 				newSetList.Reps = s.Reps.ToString();
 				newSetList.Weight = s.Weight.ToString();
@@ -53,10 +56,46 @@ namespace Dissertation.Views.Workout
 				s.SetNumber = setNumber.ToString();
 				setNumber++;
 			}
+
 			setList.ItemsSource = sortedListOfSets;
 
          
 		}       
 
+        void Handle_Clicked(object sender, System.EventArgs e)
+		{
+			ExerciseList exercise = new ExerciseList()
+			{
+				Id = ExerciseId
+			};
+
+			Navigation.PushAsync(new AddSetPage(exercise));
+		}
+
+		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+			var item = menuItem.CommandParameter as SetList;
+
+            var result = await DisplayAlert("Delete Set?", "This set will be removed, are you sure you want to delete?", "Yes", "No");
+
+            if (result)
+            {
+				var sets = await _connection.Table<Models.Persistence.Set>()
+				                            .Where(w => w.Id == item.Id).ToListAsync();
+
+                foreach (var s in sets)
+				{
+					await _connection.DeleteAsync(s);
+				}
+          
+                OnAppearing();
+			}
+        }
+
+		public async Task Handle_Clicked_2(object sender, System.EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
     }
 }

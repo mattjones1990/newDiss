@@ -14,6 +14,21 @@
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      Clicked="Handle_Clicked_1"                                    
+                                      IsDestructive="true"
+                                      CommandParameter="{Binding .}">                              
+                            </MenuItem>
+
+                            <MenuItem Text="Edit"
+                                      Clicked="Handle_Clicked_2"                                    
+                                      IsDestructive="false"
+                                      CommandParameter="{Binding .}">                              
+                            </MenuItem>
+                            
+                        </ViewCell.ContextActions>
+                        
                         <StackLayout Orientation="Horizontal">  
                             <Label Text = "{Binding Exercise}"></Label>
                             <Label Text = "{Binding MuscleGroup}"></Label>
@@ -21,7 +36,6 @@
                             <StackLayout Orientation="Vertical" HorizontalOptions="End">
                                 <Label Text="{Binding Sets}"></Label>
                             </StackLayout>
-
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>  

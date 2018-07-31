@@ -15,7 +15,7 @@ namespace Dissertation.Models
             try
             {
                 HttpWebRequest iNetRequest = (HttpWebRequest)WebRequest.Create(CheckUrl);
-                iNetRequest.Timeout = 5000;
+                iNetRequest.Timeout = 9000;
                 WebResponse iNetResponse = iNetRequest.GetResponse();
                 iNetResponse.Close();
                 return true;

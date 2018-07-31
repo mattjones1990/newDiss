@@ -4,6 +4,7 @@ using Dissertation.Models;
 using Dissertation.Models.Persistence;
 using SQLite;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Dissertation.Views.Workout
 {
@@ -17,6 +18,11 @@ namespace Dissertation.Views.Workout
 			_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
 			WorkoutId = workout.Id;
 			InitializeComponent();
+		}
+
+        public ViewExercisesPage()
+		{
+
 		}
 
 		protected override async void OnAppearing()
@@ -77,6 +83,54 @@ namespace Dissertation.Views.Workout
 		}
 
 		void Handle_Clicked(object sender, System.EventArgs e)
+		{
+			WorkoutList item = new WorkoutList()
+			{
+				Id = WorkoutId
+			};
+
+			Navigation.PushAsync(new AddExercisePage(item));
+		}
+
+		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+			var item = menuItem.CommandParameter as ExerciseList;
+
+            var result = await DisplayAlert("Delete Exercise?", "All related sets will also be removed, are you sure you want to delete?", "Yes", "No");
+
+            if (result)
+            {
+				var exercises = await _connection.Table<Models.Persistence.Exercise>()
+				                            .Where(ex => ex.Id == item.Id).ToListAsync();
+
+				List<int> exerciseInt = new List<int>();
+                foreach (var exercise in exercises)
+				{
+					exerciseInt.Add(exercise.Id);
+				}
+
+                foreach (var i in exerciseInt)
+				{
+					var sets = await _connection.Table<Models.Persistence.Set>()
+					                            .Where(w => w.ExerciseId == i).ToListAsync();
+
+                    foreach (var s in sets)
+					{
+						await _connection.DeleteAsync(s);
+					}
+				}
+
+				foreach (var exercise in exercises)
+				{
+					await _connection.DeleteAsync(exercise);
+				}
+                
+				OnAppearing();
+			}
+		}
+
+		public async Task Handle_Clicked_2(object sender, System.EventArgs e)
 		{
 			throw new NotImplementedException();
 		}

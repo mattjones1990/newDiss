@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="Dissertation.Views.Workout.AddExercisePage">
+             x:Class="Dissertation.Views.Workout.AddSetPage">
     <ContentPage.Content>
         <Grid BackgroundColor="#06a4cc">
         <Grid.RowDefinitions>
@@ -11,6 +11,7 @@
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
             <RowDefinition Height="0.3*" />
             <RowDefinition Height="0.3*" />
             <RowDefinition Height="*" />
@@ -26,7 +27,7 @@
         </Grid.ColumnDefinitions>
            
            <Label 
-               Text = "New Exercise Details"
+               Text = "New Set Details"
                Grid.Row="0" 
                Grid.Column="2" 
                Grid.ColumnSpan="3"
@@ -37,35 +38,63 @@
                FontAttributes="Bold"
                TextColor="White"/>
 
-        <Picker x:Name="ExercisePicker"
-                Title="Select Exercise"             
+            <Label 
+               Text = "Exercise..."
+               Grid.Row="1" 
+               Grid.Column="2" 
+               Grid.ColumnSpan="3"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="End"
+               FontFamily="Boulder"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="White"/>
+
+
+        <Picker x:Name="Weight"
+                Title="Select Weight"             
                 FontFamily="Boulder" 
                 FontSize="Medium"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand"
-                Grid.Row="2" 
+                Grid.Row="3" 
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
-                SelectedIndexChanged="Handle_SelectedIndexChanged">
+                >
             <Picker.Items>
             </Picker.Items>
         </Picker> 
 
-            <Button Text="Add Exercise"
+        <Picker x:Name="Reps"
+                Title="Reps"             
+                FontFamily="Boulder" 
+                FontSize="Medium"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="4" 
+                Grid.Column="2"
+                Grid.ColumnSpan="3"
+                >
+            <Picker.Items>
+            </Picker.Items>
+        </Picker> 
+
+            <Button Text="Add Set"
                 BackgroundColor="White"
                 Font="Medium"
-                Grid.Row="7" 
+                Grid.Row="8" 
                 Grid.Column="2"
                 Grid.ColumnSpan="3"
                 FontSize="18"
                 FontAttributes="Bold"
                 TextColor="#06a4cc"
-                Clicked="Handle_Clicked"/>
+                Clicked="Handle_Clicked"
+                />
 
             <Label 
                x:Name="ExerciseHistoryLabel"
-               Text = "Select an exercise to see your workout history"
-               Grid.Row="3" 
+               Text = "Input variables to see your history for this exercise"
+               Grid.Row="5" 
                Grid.RowSpan="3"
                Grid.Column="1" 
                Grid.ColumnSpan="5"
