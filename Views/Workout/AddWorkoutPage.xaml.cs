@@ -78,12 +78,12 @@ namespace Dissertation.Views.Workout
 			} 
 			else 
 			{
-				WorkoutList item = new WorkoutList()
-                {
-                    Id = workouts[0].Id
-                };
+				//WorkoutList item = new WorkoutList()
+                //{
+                //    Id = workouts[0].Id
+                //};
 
-				await Navigation.PushAsync(new Views.Workout.ViewExercisesPage(item));
+				await Navigation.PushAsync(new Views.Workout.ViewWorkoutsPage());
                 Navigation.RemovePage(this);
 			}          
         }

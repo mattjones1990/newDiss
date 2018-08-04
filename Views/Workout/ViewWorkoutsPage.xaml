@@ -6,9 +6,11 @@
              >
     <ContentPage.Content>
         <ListView x:Name="workoutList"
-                  ItemTapped="Handle_ItemTapped">
+                  ItemTapped="Handle_ItemTapped"
+                  HasUnevenRows="true"
+                  BackgroundColor="White" SeparatorColor="#06a4cc" SeparatorVisibility="Default">
             <ListView.ItemTemplate>  
-                <DataTemplate>  
+                <DataTemplate >  
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Text="Delete"
@@ -23,19 +25,43 @@
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>
                         </ViewCell.ContextActions>
-                        
-                        <StackLayout Orientation="Horizontal">  
-                            <Label Text ="{Binding WorkoutDate}"></Label>
-                            <Label Text ="{Binding MuscleGroups}"></Label>
-                            <Label Text ="testttttt"></Label>
-                            <!--<Label Text="{Binding MuscleGroups}"></Label>-->
-<!--                            <StackLayout Orientation="Vertical" HorizontalOptions="End">
-                                <Label Text="Test"></Label>
 
-                                <Label Text="{Binding MuscleGroups}"></Label>
-                            </StackLayout>-->
+
+                        <StackLayout Orientation="Horizontal" 
+                                     
+                                     Padding="3">
+                            
+                            <Label Text ="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}" 
+                                   FontSize="Small" TextColor="#06a4cc" FontAttributes="Bold" FontFamily="Boulder"/>
+                            
+                            <StackLayout HorizontalOptions="Start">
+                                
+                                <Label Text="{Binding Location, StringFormat='Location: {0}'}"  
+                                       FontSize="Small" 
+                                       TextColor="#06a4cc" 
+                                       FontAttributes="Bold" 
+                                       FontFamily="Boulder"/>
+                                <Label Text="{Binding MuscleGroups, StringFormat='Muscle Group(s): {0}'}" 
+                                       FontSize="Small" 
+                                       TextColor="#06a4cc" 
+                                       FontAttributes="Bold" 
+                                       FontFamily="Boulder"/>
+                                
+                            </StackLayout>
+                            <Button 
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding CompletedString}"  
+                                FontSize="Micro"
+                                TextColor="{Binding CompletedColor}"
+                                FontFamily="Boulder"
+                                BorderColor="#06a4cc"
+                                BorderWidth="2"
+                                BorderRadius="5"
+                                WidthRequest="100"
+                                />
                             
                         </StackLayout>
+
                     </ViewCell>
                 </DataTemplate>  
             </ListView.ItemTemplate> 

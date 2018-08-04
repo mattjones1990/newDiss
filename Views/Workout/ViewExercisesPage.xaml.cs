@@ -22,7 +22,7 @@ namespace Dissertation.Views.Workout
 
         public ViewExercisesPage()
 		{
-
+			InitializeComponent();
 		}
 
 		protected override async void OnAppearing()
@@ -80,6 +80,7 @@ namespace Dissertation.Views.Workout
 			ExerciseList item = (ExerciseList)((ListView)sender).SelectedItem;
 			((ListView)sender).SelectedItem = null;
 			Navigation.PushAsync(new ViewSetsPage(item));
+			//Navigation.RemovePage(this);
 		}
 
 		void Handle_Clicked(object sender, System.EventArgs e)
@@ -90,6 +91,7 @@ namespace Dissertation.Views.Workout
 			};
 
 			Navigation.PushAsync(new AddExercisePage(item));
+			Navigation.RemovePage(this);
 		}
 
 		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
@@ -132,7 +134,16 @@ namespace Dissertation.Views.Workout
 
 		public async Task Handle_Clicked_2(object sender, System.EventArgs e)
 		{
-			throw new NotImplementedException();
+			var menuItem = sender as MenuItem;
+			var item = menuItem.CommandParameter as ExerciseList;
+
+			ExerciseList exercise = new ExerciseList()
+            {
+                Id = item.Id
+            };
+
+			await Navigation.PushAsync(new Views.Workout.EditExercisePage(exercise));
+            Navigation.RemovePage(this);
 		}
 	}
 }

@@ -35,9 +35,22 @@ namespace Dissertation.Views.Workout
 			{
 				WorkoutList workoutFromSqlite = new WorkoutList();
 				workoutFromSqlite.Id = w.Id;
-				workoutFromSqlite.Completed = w.Completed;
-				workoutFromSqlite.WorkoutDate = w.WorkoutDate;//.ToLocalTime();             
+				//workoutFromSqlite.Completed = w.Completed;
 
+				workoutFromSqlite.WorkoutDate = w.WorkoutDate;//.ToLocalTime();   
+				workoutFromSqlite.Location = w.Location;
+
+				if (w.Completed == true) {
+					workoutFromSqlite.CompletedString = "Completed";
+					workoutFromSqlite.CompletedColor = "Green";
+                }
+				else {
+					workoutFromSqlite.CompletedString = "Not Completed";
+					workoutFromSqlite.CompletedColor = "Red";
+                }
+
+
+				//
 				var exercise = await _connection.Table<Exercise>()
 				                                .Where(e => e.WorkoutId == w.Id).ToListAsync();
                 
@@ -59,41 +72,45 @@ namespace Dissertation.Views.Workout
 
 					if (word == false)
                     {
-                        musclegroups += mg;
+                        //musclegroups += mg;
 						fullListOfStrings.Add(mg);
 
-						int repeatedInList = 0;
+						//int repeatedInList = 0;
 
-						foreach (var r in fullListOfStrings)
-						{
-							if (fullListOfStrings.Any(r.Contains))
-							{
-								repeatedInList++;
-							}
-						}
+						//foreach (var r in fullListOfStrings)
+						//{
+						//	if (fullListOfStrings.Any(r.Contains))
+						//	{
+						//		repeatedInList++;
+						//	}
+						//}
 
-						if (exerciseListDivider + 1 < exerciseCount && repeatedInList > 0)
-                        {
-                            musclegroups += "/";
-                        }
+						//if (exerciseListDivider + 1 < exerciseCount && repeatedInList > 0)
+                        //{
+                        //    musclegroups += "/";
+                        //}
 
                     }
-					exerciseListDivider++;
+					//exerciseListDivider++;
 
-                    
-
-
-					//foreach (var exn in exerciseName)
-					//{
-					//	musclegroups += exn.ExerciseNameString;
-					//	if (exerciseListDivider + 1 < exerciseCount)
-					//	{
-					//		musclegroups += "/";
-					//		exerciseListDivider++;
-					//	}
-					//}
 				}
-                            
+                
+				if (musclegroups == "" && fullListOfStrings.Count() == 0)
+				{
+					musclegroups = "None";
+				} else {
+					foreach (var str in fullListOfStrings)
+					{
+						musclegroups += str + "/"; 
+					}
+				}
+
+				int muscleGroupLength = musclegroups.Length - 1;
+				char muscleGroupLastChar = musclegroups[muscleGroupLength];
+				if (muscleGroupLastChar == '/')
+				{
+					musclegroups.Remove(muscleGroupLength, 1);
+				}
 				workoutFromSqlite.MuscleGroups = musclegroups;
 				//add string later for the body parts trained (properly)
             
@@ -173,7 +190,16 @@ namespace Dissertation.Views.Workout
         
 		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
 		{
-			throw new NotImplementedException();
+			var menuItem = sender as MenuItem;
+            var item = menuItem.CommandParameter as WorkoutList;
+
+			WorkoutList workout = new WorkoutList()
+            {
+				Id = item.Id
+            };
+
+            await Navigation.PushAsync(new Views.Workout.EditWorkoutPage(workout));
+			//Navigation.RemovePage(this);
 		}
 	}
 }

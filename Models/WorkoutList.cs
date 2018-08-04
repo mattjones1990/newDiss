@@ -9,6 +9,8 @@ namespace Dissertation.Models
         public string Location { get; set; }
         public bool Completed { get; set; }
 		public string MuscleGroups { get; set; }
+		public string CompletedColor { get; set; }
+		public string CompletedString { get; set; }
 
 
 

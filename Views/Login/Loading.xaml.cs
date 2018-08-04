@@ -36,9 +36,9 @@ namespace Dissertation.Views.Login
 			await _connection.DropTableAsync<Models.Persistence.Workout>();
 			await _connection.DropTableAsync<Set>();
 			await _connection.DropTableAsync<Exercise>();
-
-
             await _connection.DropTableAsync<ExerciseName>();
+
+
             //await _connection.DropTableAsync<Models.Persistence.Workout>();
             
             await _connection.CreateTableAsync<UsersCredentials>();

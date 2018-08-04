@@ -21,6 +21,11 @@ namespace Dissertation.Views.Workout
             InitializeComponent();
         }
 
+        public ViewSetsPage()
+		{
+			InitializeComponent();
+		}
+
 		protected override async void OnAppearing() 
 		{
 
@@ -70,6 +75,7 @@ namespace Dissertation.Views.Workout
 			};
 
 			Navigation.PushAsync(new AddSetPage(exercise));
+			Navigation.RemovePage(this);
 		}
 
 		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
@@ -93,9 +99,13 @@ namespace Dissertation.Views.Workout
 			}
         }
 
-		public async Task Handle_Clicked_2(object sender, System.EventArgs e)
+		public async Task EditSet(object sender, System.EventArgs e)
 		{
-			throw new NotImplementedException();
+			var menuItem = sender as MenuItem;
+            var item = menuItem.CommandParameter as SetList;
+
+			await Navigation.PushAsync(new EditSetPage(item));
+			Navigation.RemovePage(this);
 		}
     }
 }

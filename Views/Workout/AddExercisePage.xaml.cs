@@ -154,8 +154,8 @@ namespace Dissertation.Views.Workout
 				Id = WorkoutId
 			};
 			
-			Navigation.RemovePage(this);
             await Navigation.PushAsync(new Views.Workout.ViewExercisesPage(workout));
+			Navigation.RemovePage(this);
 
             //if (exerciseCheck.Count != 1)
     //        {
