@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Dissertation.Views.Workout.ViewSetsPage"
-             Title="Sets"
+             Title="{Binding PageTitle}"
              >
 
     <ContentPage.ToolbarItems>
@@ -12,7 +12,9 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <ListView x:Name="setList">
+        <ListView x:Name="setList"
+                  SeparatorColor="#06a4cc" 
+                  SeparatorVisibility="Default">
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>
@@ -28,20 +30,57 @@
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>
                         </ViewCell.ContextActions>
-                        
-                        <StackLayout Orientation="Horizontal">  
-                            <Label Text = "{Binding SetNumber}"/>
-                            <Label Text = "{Binding Weight, 
-                            StringFormat='Weight: {0}'}"/>
-                            <Label Text = "{Binding Set, 
-                            StringFormat='Set: {0}'}"/>
-                          
-                            <StackLayout Orientation="Vertical" 
-                                         HorizontalOptions="End">
-                                <Label Text="Test"></Label>
-                            </StackLayout>
+
+
+                        <StackLayout>
+                                      
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5">
+                        <StackLayout>
+
+                            <Label Text="{Binding SetNumber,StringFormat='({0})'}"
+                                   FontSize="Large" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"
+                                   HorizontalTextAlignment="Center"/>
+
+                           
                             
                         </StackLayout>
+
+                             <Label Text="{Binding Weight, StringFormat='{0}kg'}"
+                                   FontSize="Medium" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                                
+                            <Label Text="{Binding Reps, StringFormat='Reps: {0}'}"
+                                   FontSize="Medium"
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"/>
+                                
+                        </StackLayout>
+                            
+                        <Label Text="-------------" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   TextColor="#06a4cc" 
+                                   FontSize="Small"
+                                   FontFamily="Boulder"/> 
+                        </StackLayout>
+                                              
+
+
+
+
+
+                        
+                   
                     </ViewCell>
                 </DataTemplate>  
             </ListView.ItemTemplate> 

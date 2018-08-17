@@ -224,8 +224,8 @@ namespace Dissertation.Views.Login
 
             await _connection.ExecuteAsync("DELETE FROM ExerciseName");
             var exerciseName1 = new ExerciseName { ExerciseNameString = "Bench Press", ExerciseGroupId = 4, ExerciseMuscleGroup = "Chest" };
-			var exerciseName2 = new ExerciseName { ExerciseNameString = "Squat", ExerciseGroupId = 3,ExerciseMuscleGroup = "Leg" };
-			var exerciseName3 = new ExerciseName { ExerciseNameString = "Db Shoulder Press", ExerciseGroupId = 6,ExerciseMuscleGroup = "Shoulder" };
+			var exerciseName2 = new ExerciseName { ExerciseNameString = "Squat", ExerciseGroupId = 3,ExerciseMuscleGroup = "Legs" };
+			var exerciseName3 = new ExerciseName { ExerciseNameString = "Db Shoulder Press", ExerciseGroupId = 6,ExerciseMuscleGroup = "Shoulders" };
 			var exerciseName4 = new ExerciseName { ExerciseNameString = "Deadlift", ExerciseGroupId = 5,ExerciseMuscleGroup = "Back" };
 
             // fill in later.

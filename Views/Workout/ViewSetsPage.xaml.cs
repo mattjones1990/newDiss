@@ -14,10 +14,12 @@ namespace Dissertation.Views.Workout
 		private SQLiteAsyncConnection _connection;
 		public int ExerciseId { get; set; }
 
+
         public ViewSetsPage(ExerciseList exerciseList)
         {
 			ExerciseId = exerciseList.Id;
 			_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+                               
             InitializeComponent();
         }
 
@@ -28,28 +30,35 @@ namespace Dissertation.Views.Workout
 
 		protected override async void OnAppearing() 
 		{
-
 			List<SetList> ListOfSets = new List<SetList>();
 			var sets = await _connection.Table<Models.Persistence.Set>().ToListAsync();
 			var setsForExercise = new List<Set>();
 
+
+			//Exercise Name for Navigation Bar
+			var exercises = await Exercise.GetAllExerciseRecordsById(_connection, ExerciseId);
+            int exerciseIdForName = exercises[0].ExerciseNameId;
+			var exerciseName = await ExerciseName.GetAllExerciseNameRecordsById(_connection, exerciseIdForName);
+
+			Title = exerciseName[0].ExerciseNameString;
+            //End
+
             foreach (var s in sets)
-			{
-				if (s.ExerciseId == ExerciseId)
-				{
-					setsForExercise.Add(s);
-				}
-			}
+            {
+                if (s.ExerciseId == ExerciseId)
+                {
+                    setsForExercise.Add(s);
+                }
+            }
 
-			foreach (var s in setsForExercise)
-			{
-				SetList newSetList = new SetList();
-				newSetList.ExerciseId = s.ExerciseId;
-				newSetList.Id = s.Id;
-				newSetList.TimeOfSet = s.TimeOfSet;
-				newSetList.Reps = s.Reps.ToString();
-				newSetList.Weight = s.Weight.ToString();
-
+            foreach (var s in setsForExercise)
+            {
+                SetList newSetList = new SetList();
+                newSetList.ExerciseId = s.ExerciseId;
+                newSetList.Id = s.Id;
+                newSetList.TimeOfSet = s.TimeOfSet;
+                newSetList.Reps = s.Reps.ToString();
+                newSetList.Weight = s.Weight.ToString();
 				ListOfSets.Add(newSetList);
 			}
 
@@ -87,8 +96,7 @@ namespace Dissertation.Views.Workout
 
             if (result)
             {
-				var sets = await _connection.Table<Models.Persistence.Set>()
-				                            .Where(w => w.Id == item.Id).ToListAsync();
+				var sets = await Set.GetAllSetsById(_connection, item.Id);
 
                 foreach (var s in sets)
 				{

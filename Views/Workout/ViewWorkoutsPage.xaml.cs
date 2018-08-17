@@ -24,9 +24,7 @@ namespace Dissertation.Views.Workout
 			List<WorkoutList> ListOfWorkouts = new List<WorkoutList>();
 
 			//Get the records
-			var workouts = await _connection.Table<Models.Persistence.Workout>()
-			                                .OrderByDescending(w => w.WorkoutDate)
-			                                .ToListAsync();
+			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsInDescendingOrder(_connection);
 			
 			var workoutCount = workouts.Count;
 
@@ -40,68 +38,31 @@ namespace Dissertation.Views.Workout
 				workoutFromSqlite.WorkoutDate = w.WorkoutDate;//.ToLocalTime();   
 				workoutFromSqlite.Location = w.Location;
 
-				if (w.Completed == true) {
-					workoutFromSqlite.CompletedString = "Completed";
-					workoutFromSqlite.CompletedColor = "Green";
-                }
-				else {
-					workoutFromSqlite.CompletedString = "Not Completed";
-					workoutFromSqlite.CompletedColor = "Red";
-                }
-
-
-				//
-				var exercise = await _connection.Table<Exercise>()
-				                                .Where(e => e.WorkoutId == w.Id).ToListAsync();
-                
-				string musclegroups = "";
-                List<string> muscleGroupList = new List<string>();
-
-				int exerciseCount = exercise.Count;
-                int exerciseListDivider = 1;
-				List<string> fullListOfStrings = new List<string>();
-
-                foreach (var item in exercise)
+				if (w.Completed == true)
 				{
-					var exerciseName = await _connection.Table<ExerciseName>()
-					                                    .Where(en => en.Id == item.ExerciseNameId)
-                                                        .ToListAsync();
-
-					string mg = exerciseName[0].ExerciseMuscleGroup;
-					bool word = fullListOfStrings.Any(mg.Contains);
-
-					if (word == false)
-                    {
-                        //musclegroups += mg;
-						fullListOfStrings.Add(mg);
-
-						//int repeatedInList = 0;
-
-						//foreach (var r in fullListOfStrings)
-						//{
-						//	if (fullListOfStrings.Any(r.Contains))
-						//	{
-						//		repeatedInList++;
-						//	}
-						//}
-
-						//if (exerciseListDivider + 1 < exerciseCount && repeatedInList > 0)
-                        //{
-                        //    musclegroups += "/";
-                        //}
-
-                    }
-					//exerciseListDivider++;
-
+					//workoutFromSqlite.CompletedString = "Completed";
+					workoutFromSqlite.CompletedString = "\u2714";
+					workoutFromSqlite.CompletedColor = "Green";
+				}
+				else
+				{
+					//workoutFromSqlite.CompletedString = "Not Completed";
+					workoutFromSqlite.CompletedString = "X";
+					workoutFromSqlite.CompletedColor = "Red";
 				}
                 
+				//
+                List<string> fullListOfStrings = await ExerciseName.GetListOfExerciseStrings(_connection, w);               
+				string musclegroups = "";
 				if (musclegroups == "" && fullListOfStrings.Count() == 0)
 				{
 					musclegroups = "None";
-				} else {
+				}
+				else
+				{
 					foreach (var str in fullListOfStrings)
 					{
-						musclegroups += str + "/"; 
+						musclegroups += str + "/";
 					}
 				}
 
@@ -112,19 +73,15 @@ namespace Dissertation.Views.Workout
 					musclegroups.Remove(muscleGroupLength, 1);
 				}
 				workoutFromSqlite.MuscleGroups = musclegroups;
-				//add string later for the body parts trained (properly)
-            
+
 				ListOfWorkouts.Add(workoutFromSqlite);
 			}
-            
 
 			workoutList.ItemsSource = ListOfWorkouts;
 		}
-
-        
+              
 		void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-			//DisplayAlert("More Context Action", "HOG" + " more context action", "OK");
             WorkoutList item = (WorkoutList)((ListView)sender).SelectedItem;
             ((ListView)sender).SelectedItem = null;
 			Navigation.PushAsync(new ViewExercisesPage(item));
@@ -132,9 +89,6 @@ namespace Dissertation.Views.Workout
         
 		public async Task Handle_Clicked(object sender, System.EventArgs e)
 		{
-
-			//WorkoutList item = (WorkoutList)((ListView)sender).SelectedItem;
-			//InventoryVsCount ivc = (InventoryVsCount)this.BindingContext;
 			var menuItem = sender as MenuItem;
 			var item = menuItem.CommandParameter as WorkoutList;
                                      
@@ -142,52 +96,11 @@ namespace Dissertation.Views.Workout
 
             if (result)
 			{
-				var workouts = await _connection.Table<Models.Persistence.Workout>()
-                                .Where(w => w.Id == item.Id).ToListAsync();
-
-				List<int> workoutInt = new List<int>();
-				foreach (var w in workouts)
-				{
-					workoutInt.Add(w.Id);
-				}
-
-				foreach (var i in workoutInt)
-				{
-					var exercises = await _connection.Table<Models.Persistence.Exercise>()
-					                                 .Where(w => w.WorkoutId == i).ToListAsync();
-					
-					List<int> exerciseInt = new List<int>();
-					foreach (var ex in exercises)
-					{
-						exerciseInt.Add(ex.Id);
-					}
-
-                    foreach (var exInt in exerciseInt)
-					{
-						var sets = await _connection.Table<Models.Persistence.Set>()
-						                            .Where(w => w.ExerciseId == exInt).ToListAsync();
-
-						foreach (var s in sets)
-						{
-							await _connection.DeleteAsync(s);
-						}                                          
-					}
-
-					foreach (var exItem in exercises)
-					{
-						await _connection.DeleteAsync(exItem);
-					}
-				}
-
-                foreach (var workout in workouts)
-				{
-					await _connection.DeleteAsync(workout);
-				}
-
-				OnAppearing();
+				var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsById(_connection, item.Id);
+				await RemoveRecords(workouts);
 			}
 		}
-        
+
 		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
 		{
 			var menuItem = sender as MenuItem;
@@ -199,7 +112,14 @@ namespace Dissertation.Views.Workout
             };
 
             await Navigation.PushAsync(new Views.Workout.EditWorkoutPage(workout));
-			//Navigation.RemovePage(this);
+		}
+
+		private async Task RemoveRecords(List<Models.Persistence.Workout> workouts)
+		{
+			WorkoutFactory workout = new WorkoutFactory();
+			await workout.RemoveWorkoutAndRelatedExercisesAndSets(_connection, workouts);
+
+			OnAppearing();
 		}
 	}
 }

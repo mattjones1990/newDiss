@@ -93,8 +93,7 @@ namespace Dissertation.Views.Workout
 
 			await _connection.InsertAsync(set);
 
-			var sets = await _connection.Table<Models.Persistence.Set>()
-                                            .Where(w => w.TimeOfSet == date).ToListAsync();
+			var sets = await Set.GetSetsByDate(_connection, date);
 
             if (sets.Count != 1)
 			{
@@ -119,13 +118,3 @@ namespace Dissertation.Views.Workout
 		}
     }
 }
-////Populate picker
-//var exerciseNames = await _connection.Table<ExerciseName>().ToListAsync();
-//var pickerList = new List<string>();
-           
-            //foreach (var exerciseName in exerciseNames)
-            //{
-            //    pickerList.Add(exerciseName.ExerciseNameString);
-            //}
-
-            //ExercisePicker.ItemsSource = pickerList;

@@ -53,6 +53,26 @@ namespace Dissertation.Views.Workout
 
                 //Add exercise record
 
+                /*
+                 * IF the exercise is a compound lift, enter this block
+                 *      Get the previous exercise records and sets for this lift
+                 *      IF Check if there has been a set of 12,10,8,6,4 completed in the last ten days
+                 *      -    If there has, get the 1RM based on the set of 4
+                 *      -        Calculate the new 12,10,8,6,4 based on this
+                 *      -
+                 *      ELSE IF Check if its been 20 days since the last workout.
+                 *          IF NOT then use the last set of 12,10,8,6,4.
+                 * 
+                 *      IF ITS BEEN 20 DAYS
+                 *          Ask for an estimate of the persons 1rm and calculate 12,10,8,6,4 from that.
+                 *      
+                 * 
+                 * 
+                 * 
+                 * 
+                 */
+                
+
                 //Add sets for that exercise
 			}
 		}
@@ -66,10 +86,10 @@ namespace Dissertation.Views.Workout
 				Location = location,
 				Completed = false
 			};
+
 			await _connection.InsertAsync(workout1);
-            
-			var workouts = await _connection.Table<Models.Persistence.Workout>()
-			                                .Where(w => w.WorkoutDate == date).ToListAsync();
+
+			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsByDate(_connection, date); 
          
 			if (workouts.Count != 1)
 			{

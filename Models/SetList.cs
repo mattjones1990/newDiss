@@ -9,6 +9,7 @@ namespace Dissertation.Models
 		public string Weight { get; set; }
         public string Reps { get; set; }
 		public string SetNumber { get; set; }
+        public string PageTitle { get; set; }
     }
 }
 

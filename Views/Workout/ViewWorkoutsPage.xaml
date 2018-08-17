@@ -8,7 +8,10 @@
         <ListView x:Name="workoutList"
                   ItemTapped="Handle_ItemTapped"
                   HasUnevenRows="true"
-                  BackgroundColor="White" SeparatorColor="#06a4cc" SeparatorVisibility="Default">
+                  BackgroundColor="White" 
+                  SeparatorColor="#06a4cc" 
+                  SeparatorVisibility="None">
+            
             <ListView.ItemTemplate>  
                 <DataTemplate >  
                     <ViewCell>
@@ -26,9 +29,59 @@
                             </MenuItem>
                         </ViewCell.ContextActions>
 
+                        <StackLayout>
+                            
+                        
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5">
+                            <StackLayout>
 
-                        <StackLayout Orientation="Horizontal" 
-                                     
+                            <Label Text="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}"
+                                   FontSize="Small" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"/>
+                            <Label Text="{Binding MuscleGroups, StringFormat='Muscle Group(s): {0}'}"
+                                   FontSize="Small" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"/>
+                            <Label Text="{Binding Location, StringFormat='Location: {0}'}"
+                                   FontSize="Small" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"/>
+                                                      
+                            </StackLayout>
+                            <Button                                 
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding CompletedString}"  
+                                FontSize="Large"
+                                TextColor="{Binding CompletedColor}"
+                                FontFamily="Boulder"
+                                BorderColor="#06a4cc"
+                                BorderWidth="2"
+                                BorderRadius="5"
+                                WidthRequest="100"/>
+                        </StackLayout>
+                            <Label Text="-------------" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   TextColor="#06a4cc" 
+                                   FontSize="Small"
+                                   FontFamily="Boulder"/> 
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>  
+            </ListView.ItemTemplate> 
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
+
+
+
+
+                        <!--<StackLayout Orientation="Horizontal"                                     
                                      Padding="3">
                             
                             <Label Text ="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}" 
@@ -60,11 +113,4 @@
                                 WidthRequest="100"
                                 />
                             
-                        </StackLayout>
-
-                    </ViewCell>
-                </DataTemplate>  
-            </ListView.ItemTemplate> 
-        </ListView>
-    </ContentPage.Content>
-</ContentPage>
+                        </StackLayout>-->

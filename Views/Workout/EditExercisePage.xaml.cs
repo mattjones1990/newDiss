@@ -32,19 +32,14 @@ namespace Dissertation.Views.Workout
 
 		protected override async void OnAppearing()
 		{
-			var exercise = await _connection.Table<Models.Persistence.Exercise>()
-			                                .Where(e => e.Id == ExerciseId)
-                                            .ToListAsync();
+			var exercise = await Exercise.GetAllExerciseRecordsById(_connection, ExerciseId);
 
-			int currentExerciseInt = exercise[0].ExerciseNameId;
-
-            var currentExerciseName = await _connection.Table<ExerciseName>()
-				                                           .Where(en => en.Id == currentExerciseInt)
-														   .ToListAsync();
+			int currentExerciseId = exercise[0].ExerciseNameId;
+			var currentExerciseName = await ExerciseName.GetAllExerciseNameRecordsById(_connection, currentExerciseId);
             
 			ExercisePicker.SelectedItem = currentExerciseName[0].ExerciseNameString;
            
-            var exerciseNames = await _connection.Table<ExerciseName>().ToListAsync();
+			var exerciseNames = await ExerciseName.GetAllExerciseNameRecords(_connection); 
             var pickerList = new List<string>();
 
             foreach (var exerciseName in exerciseNames)
@@ -91,20 +86,17 @@ namespace Dissertation.Views.Workout
 		public async Task UpdateExercise(string pickerListString, DateTime date)
         {
 
-            var exerciseId = await _connection.Table<ExerciseName>()
-                              .Where(en => en.ExerciseNameString == pickerListString)
-                              .ToListAsync();
+			var exerciseId = await ExerciseName.GetAllExerciseNameRecordsByExerciseNameString(_connection, pickerListString);
 
             if (exerciseId.Count > 1)
                 return;
 
             int exerciseIdForInsert = exerciseId[0].Id;
-            DateTime now = date;
 
             var exercise = new Models.Persistence.Exercise
             {
 				Id = ExerciseId,
-                DateOfExercise = now,
+                DateOfExercise = date,
                 WorkoutId = WorkoutId,
                 ExerciseNameId = exerciseIdForInsert
             };
@@ -122,34 +114,3 @@ namespace Dissertation.Views.Workout
     }
 }
 
-
-
-
-//public class Exercise
-//{
-//    [PrimaryKey, AutoIncrement]
-//    public int Id { get; set; }
-//    public int WorkoutId { get; set; }
-//    //public int ExerciseGroupId { get; set; }
-//    public int ExerciseNameId { get; set; }
-//    public DateTime DateOfExercise { get; set; }
-//    //public Exercise()
-//    //{
-//    //}
-//}
-
-////public class ExerciseGroup 
-////{
-////  [PrimaryKey, AutoIncrement]
-////       public int Id { get; set; }
-////  public string ExerciseGroupName { get; set;}
-////}
-
-//public class ExerciseName
-//{
-//    [PrimaryKey, AutoIncrement]
-//    public int Id { get; set; }
-//    public string ExerciseNameString { get; set; }
-//    public string ExerciseMuscleGroup { get; set; }
-//    public int ExerciseGroupId { get; set; }
-//}

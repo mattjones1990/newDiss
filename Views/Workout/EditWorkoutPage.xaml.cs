@@ -30,11 +30,9 @@ namespace Dissertation.Views.Workout
 		}
 
 		protected override async void OnAppearing()
-		{ 
-			var workouts = await _connection.Table<Models.Persistence.Workout>()
-			                                .Where(w => w.Id == WorkoutId)
-                                            .ToListAsync();
-
+		{
+			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsById(_connection, WorkoutId);
+			                                                                                                                       
 			DatePicker.Date = workouts[0].WorkoutDate;
 			LocationField.Text = workouts[0].Location;         
 		}

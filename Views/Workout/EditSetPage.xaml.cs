@@ -33,16 +33,10 @@ namespace Dissertation.Views.Workout
 		protected override async void OnAppearing()
 		{
 			//Exercise Label Text
-			var exercise = await _connection.Table<Models.Persistence.Exercise>()
-                                            .Where(e => e.Id == ExerciseId)
-                                            .ToListAsync();
+			var exercise = await Models.Persistence.Exercise.GetAllExerciseRecordsById(_connection, ExerciseId);
 
-            int currentExerciseInt = exercise[0].ExerciseNameId;
-
-            var currentExerciseName = await _connection.Table<ExerciseName>()
-                                                           .Where(en => en.Id == currentExerciseInt)
-                                                           .ToListAsync();
-                                                       
+            int currentExerciseId = exercise[0].ExerciseNameId;
+			var currentExerciseName = await ExerciseName.GetAllExerciseNameRecordsById(_connection, currentExerciseId);                                                      
 			Exercise.Text = currentExerciseName[0].ExerciseNameString.ToString();
 
             //Current selections
@@ -124,8 +118,7 @@ namespace Dissertation.Views.Workout
             };
 
             await Navigation.PushAsync(new Views.Workout.ViewSetsPage(exerciseList));
-            Navigation.RemovePage(this);
-            
+            Navigation.RemovePage(this);           
         }
     }
 }

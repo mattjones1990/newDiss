@@ -28,7 +28,7 @@ namespace Dissertation.Views.Workout
 		protected override async void OnAppearing()
 		{
 			List<ExerciseList> ListOfExercises = new List<ExerciseList>();
-			var exercises = await _connection.Table<Models.Persistence.Exercise>().ToListAsync();
+			var exercises = await Exercise.GetAllExercise(_connection);          
 			var exercisesForWorkout = new List<Exercise>();
 
 			foreach (var e in exercises)
@@ -42,31 +42,29 @@ namespace Dissertation.Views.Workout
 			//var exerciseGroup3 = await _connection.Table<ExerciseGroup>().ToListAsync();
 			//var exerciseGroupCount = exerciseGroup3.Count;
 
-			var exerciseName2 = await _connection.Table<ExerciseName>().ToListAsync();
+			var exerciseName2 = await ExerciseName.GetAllExerciseNameRecords(_connection);
 			var exerciseNameCount = exerciseName2.Count;
 
 
-
+			int exerciseNumber = 1; 
 			foreach (var e in exercisesForWorkout)
 			{
-				var exerciseName = await _connection.Table<ExerciseName>()
-													.Where(en => en.Id == e.ExerciseNameId)
-													.ToListAsync();
-
-				//var exerciseMuscleGroup = await _connection.Table<ExerciseGroup>()
-				//.Where(eg => eg.Id == exerciseName[0].ExerciseGroupId)
-				//.ToListAsync();
-
-				int sets = 5; //sort later
+				var exerciseName = await ExerciseName.GetAllExerciseNameRecordsById(_connection, e.ExerciseNameId);
+                               
+				var sets = await _connection.Table<Models.Persistence.Set>()
+				                            .Where(w => w.ExerciseId == e.Id).ToListAsync();
 
 				ExerciseList exerciseFromSqLite = new ExerciseList();
 				exerciseFromSqLite.Id = e.Id;
 				exerciseFromSqLite.WorkoutId = e.WorkoutId;
 				exerciseFromSqLite.Exercise = exerciseName[0].ExerciseNameString;
 				exerciseFromSqLite.MuscleGroup = exerciseName[0].ExerciseMuscleGroup;
-				exerciseFromSqLite.Sets = sets.ToString();
+				exerciseFromSqLite.Sets = sets.Count.ToString();
+				exerciseFromSqLite.FrontEndExerciseString = exerciseNumber.ToString() + ") " + exerciseName[0].ExerciseNameString;
 
 				ListOfExercises.Add(exerciseFromSqLite);
+
+				exerciseNumber++;
 			}
 
 
@@ -103,9 +101,8 @@ namespace Dissertation.Views.Workout
 
             if (result)
             {
-				var exercises = await _connection.Table<Models.Persistence.Exercise>()
-				                            .Where(ex => ex.Id == item.Id).ToListAsync();
-
+				var exercises = await Exercise.GetAllExerciseRecordsById(_connection, item.Id);
+               
 				List<int> exerciseInt = new List<int>();
                 foreach (var exercise in exercises)
 				{
@@ -114,9 +111,7 @@ namespace Dissertation.Views.Workout
 
                 foreach (var i in exerciseInt)
 				{
-					var sets = await _connection.Table<Models.Persistence.Set>()
-					                            .Where(w => w.ExerciseId == i).ToListAsync();
-
+					var sets = await Set.GetAllSetsByExerciseId(_connection, i);
                     foreach (var s in sets)
 					{
 						await _connection.DeleteAsync(s);

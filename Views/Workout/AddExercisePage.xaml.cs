@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using Dissertation.Models;
 using Xamarin.Forms;
-//using Dissertation.Models;
 using Dissertation.Models.Persistence;
 using SQLite;
 using System.Threading.Tasks;
-//using Xamarin.Forms;
 using System.Linq;
 
 namespace Dissertation.Views.Workout
@@ -31,7 +29,7 @@ namespace Dissertation.Views.Workout
 		protected override async void OnAppearing()
 		{
 			//Populate picker
-			var exerciseNames = await _connection.Table<ExerciseName>().ToListAsync();
+			var exerciseNames = await ExerciseName.GetAllExerciseNameRecords(_connection);              //_connection.Table<ExerciseName>().ToListAsync();
 			var pickerList = new List<string>();
            
 			foreach (var exerciseName in exerciseNames)
@@ -46,9 +44,7 @@ namespace Dissertation.Views.Workout
 		{
 			var pickerListString = ExercisePicker.Items[ExercisePicker.SelectedIndex];
 
-			var exerciseId = await _connection.Table<ExerciseName>()
-			                                  .Where(en => en.ExerciseNameString == pickerListString)
-			                                  .ToListAsync();
+			var exerciseId = await ExerciseName.GetAllExerciseNameRecordsByExerciseNameString(_connection, pickerListString);
 			
 			if (exerciseId.Count != 1)
 			{
@@ -58,10 +54,8 @@ namespace Dissertation.Views.Workout
 			{
 				DateTime thirtyDaysAgo = DateTime.Now.AddDays(-30);
                 int exerciseIdForCount = exerciseId[0].Id;
-                var exerciseListForId = await _connection.Table<Exercise>()
-                                                         .Where(ez => ez.ExerciseNameId == exerciseIdForCount)
-                                                         .Where(dt => dt.DateOfExercise > thirtyDaysAgo)
-                                                         .ToListAsync();
+				var exerciseListForId = await Exercise.GetAllExerciseRecordsByExerciseNameIdBeforeDate(_connection, exerciseIdForCount, thirtyDaysAgo);
+				
 				if (exerciseListForId.Count < 1)
 				{
 					ExerciseHistoryLabel.Text = "No workout history available for this exercise.";
@@ -72,9 +66,8 @@ namespace Dissertation.Views.Workout
 
                 foreach (var item in exerciseListForId)
                 {
-                    var sets = await _connection.Table<Set>()
-                                                .Where(s => s.ExerciseId == item.Id).ToListAsync();
-
+					var sets = await Set.GetAllSetsByExerciseId(_connection, item.Id);
+                                      
                     foreach (var s in sets)
                     {
                         listOfSets.Add(s);
@@ -128,10 +121,8 @@ namespace Dissertation.Views.Workout
 
 		public async Task AddExerciseToInternalDb(string pickerListString) {
 
-            var exerciseId = await _connection.Table<ExerciseName>()
-                              .Where(en => en.ExerciseNameString == pickerListString)
-                              .ToListAsync();
-
+			var exerciseId = await ExerciseName.GetAllExerciseNameRecordsByExerciseNameString(_connection, pickerListString);
+           
 			if (exerciseId.Count > 1)
 				return;
 
@@ -146,8 +137,7 @@ namespace Dissertation.Views.Workout
 
 			await _connection.InsertAsync(exercise);
 
-			var exerciseCheck = await _connection.Table<Models.Persistence.Exercise>()
-                                            .Where(w => w.DateOfExercise == now).ToListAsync();
+			var exerciseCheck = await Exercise.GetAllExerciseRecordsByDate(_connection, now);
 
 			WorkoutList workout = new WorkoutList()
 			{
@@ -156,25 +146,7 @@ namespace Dissertation.Views.Workout
 			
             await Navigation.PushAsync(new Views.Workout.ViewExercisesPage(workout));
 			Navigation.RemovePage(this);
-
-            //if (exerciseCheck.Count != 1)
-    //        {
-    //        }
-    //        else
-    //        {
-				////ExerciseList exerciseList = new ExerciseList()
-				////{
-				////	Id = exerciseCheck[0].Id
-				////};
-
-				//WorkoutList workout = new WorkoutList()
-    //            {
-    //                Id = WorkoutId
-    //            };
-
-				//await Navigation.PushAsync(new Views.Workout.ViewExercisesPage(workout));
-            //    Navigation.RemovePage(this);
-            //}
+            
         }
     }
 }

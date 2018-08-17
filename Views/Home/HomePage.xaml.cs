@@ -86,7 +86,17 @@ namespace Dissertation.Views.Home
 
 		public async Task RedirectToWorkoutsPage()
 		{
-			await Navigation.PushAsync(new Views.Workout.ViewWorkoutsPage());
+			var workouts = await _connection.Table<Models.Persistence.Workout>().ToListAsync();
+            var workoutCount = workouts.Count();
+
+			if (workoutCount > 0)
+			{
+				await Navigation.PushAsync(new Views.Workout.ViewWorkoutsPage());
+			}
+			else
+			{
+				await DisplayAlert("No Workouts", "Please add a workout first by selecting 'New Workout'", "Ok");
+			}
 		}
 
 		public async Task RedirectToNewWorkoutPage()

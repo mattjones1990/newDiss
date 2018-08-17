@@ -12,6 +12,7 @@ namespace Dissertation.Models
         public bool Completed { get; set; }
         public string MuscleGroup { get; set; }
 		public string Sets { get; set; }
+        public string FrontEndExerciseString { get; set; }
 
         public ExerciseList()
         {

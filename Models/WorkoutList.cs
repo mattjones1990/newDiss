@@ -11,9 +11,7 @@ namespace Dissertation.Models
 		public string MuscleGroups { get; set; }
 		public string CompletedColor { get; set; }
 		public string CompletedString { get; set; }
-
-
-
+             
         public WorkoutList()
         {
         }

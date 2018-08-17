@@ -10,7 +10,10 @@
     
     <ContentPage.Content>
         <ListView x:Name="ListViewExercises"
-                  ItemTapped="Handle_ItemTapped">
+                  ItemTapped="Handle_ItemTapped"
+                  BackgroundColor="White" 
+                  SeparatorColor="#06a4cc" 
+                  SeparatorVisibility="Default">
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>
@@ -28,15 +31,35 @@
                             </MenuItem>
                             
                         </ViewCell.ContextActions>
-                        
-                        <StackLayout Orientation="Horizontal">  
-                            <Label Text = "{Binding Exercise}"></Label>
-                            <Label Text = "{Binding MuscleGroup}"></Label>
-                          
-                            <StackLayout Orientation="Vertical" HorizontalOptions="End">
-                                <Label Text="{Binding Sets}"></Label>
-                            </StackLayout>
+
+                        <StackLayout>                                      
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="15">
+                        <StackLayout>
+
+                            <Label Text="{Binding FrontEndExerciseString}"
+                                   FontSize="Medium" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"
+                                   HorizontalTextAlignment="Center"/>
+
+                           
+                            
                         </StackLayout>
+                                
+                            <Label Text="{Binding Sets, StringFormat='Sets: {0}'}"
+                                   FontSize="Medium"
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"/>
+                                
+                        </StackLayout>
+                            
+
+                        </StackLayout>
+                                                                                                                
                     </ViewCell>
                 </DataTemplate>  
             </ListView.ItemTemplate> 
