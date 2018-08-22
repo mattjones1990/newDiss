@@ -17,10 +17,10 @@ namespace Dissertation.Models.Persistence
 		[MaxLength(255)]
 		public string Password { get; set; }
         
-		private async Task CheckUserCredentialsTable() 
-		{
+		//public static Task CheckUserCredentialsTable() 
+		//{
 			
-		}
+		//}
 
     }
 }

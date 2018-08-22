@@ -276,7 +276,7 @@ namespace Dissertation.Views.Login
                 else
                 {
                     connection = true;
-                    Task.Delay(2000).Wait();
+                    Task.Delay(1000).Wait();
                 }
             }
         }                

@@ -16,6 +16,7 @@ namespace Dissertation.Views.Workout
 		private SQLiteAsyncConnection _connection;
 		public int SetId { get; set; }
 		public int ExerciseId { get; set; }
+		public DateTime Date { get; set; }
 
         public EditSetPage(SetList set)
         {
@@ -23,6 +24,7 @@ namespace Dissertation.Views.Workout
             InitializeComponent();
 			SetId = set.Id;
 			ExerciseId = set.ExerciseId;
+			Date = set.TimeOfSet;
         }
 
         public EditSetPage()
@@ -42,9 +44,7 @@ namespace Dissertation.Views.Workout
             //Current selections
 			var sets = await _connection.Table<Models.Persistence.Set>()
 			                            .Where(s => s.Id == SetId).ToListAsync();
-
-
-
+            
 			//Populate pickers
             List<int> reps = new List<int>();
             List<decimal> weight = new List<decimal>();
@@ -107,7 +107,8 @@ namespace Dissertation.Views.Workout
 				Id = SetId,
 				ExerciseId = ExerciseId,
                 Weight = weight,
-                Reps = rep
+                Reps = rep,
+				TimeOfSet = Date
             };
 
 			await _connection.UpdateAsync(set);

@@ -66,11 +66,7 @@ namespace Dissertation.Views.Workout
 
             if (pickerOne != "" && pickerTwo != "")
             {
-				AddSetToInternalDb(pickerDate, pickerOne, pickerTwo);
-                
-                //Add exercise record
-                
-                //Add sets for that exercise
+				AddSetToInternalDb(pickerDate, pickerOne, pickerTwo);                
             }
 			else {
 				DisplayAlert("Invalid Entry", "Please populate all fields (use 0 if needed", "Ok");

@@ -14,11 +14,9 @@ namespace Dissertation.Models.Persistence
 		//public int ExerciseGroupId { get; set; }
 		public int ExerciseNameId { get; set; }
 		public DateTime DateOfExercise { get; set; }
-		//private SQLiteAsyncConnection _connection;
 
 		public Exercise()
 		{
-			//_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
 		}
         
 		public static async Task<List<Exercise>> GetAllExercise(SQLiteAsyncConnection _connection)
@@ -44,6 +42,13 @@ namespace Dissertation.Models.Persistence
         {
             return await _connection.Table<Exercise>()
                                     .Where(w => w.DateOfExercise == date)
+                                    .ToListAsync();
+        }
+
+		public static async Task<List<Exercise>> GetAllExerciseRecordsByExerciseNameId(SQLiteAsyncConnection _connection, int id)
+        {
+            return await _connection.Table<Exercise>()
+                                    .Where(ez => ez.ExerciseNameId == id)                                 
                                     .ToListAsync();
         }
 

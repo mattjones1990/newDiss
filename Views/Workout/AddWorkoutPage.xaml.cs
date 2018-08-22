@@ -49,35 +49,11 @@ namespace Dissertation.Views.Workout
             
 			if (CheckFields(newDate, LocationField.Text, pickerOne, pickerTwo)) 
 			{
-				AddWorkoutToInternalDb(newDate, LocationField.Text);
-
-                //Add exercise record
-
-                /*
-                 * IF the exercise is a compound lift, enter this block
-                 *      Get the previous exercise records and sets for this lift
-                 *      IF Check if there has been a set of 12,10,8,6,4 completed in the last ten days
-                 *      -    If there has, get the 1RM based on the set of 4
-                 *      -        Calculate the new 12,10,8,6,4 based on this
-                 *      -
-                 *      ELSE IF Check if its been 20 days since the last workout.
-                 *          IF NOT then use the last set of 12,10,8,6,4.
-                 * 
-                 *      IF ITS BEEN 20 DAYS
-                 *          Ask for an estimate of the persons 1rm and calculate 12,10,8,6,4 from that.
-                 *      
-                 * 
-                 * 
-                 * 
-                 * 
-                 */
-                
-
-                //Add sets for that exercise
+				AddWorkoutToInternalDb(newDate, LocationField.Text, pickerOne, pickerTwo);              
 			}
 		}
 
-        public async Task AddWorkoutToInternalDb(DateTime date, string location)
+        public async Task AddWorkoutToInternalDb(DateTime date, string location, string exerciseOne, string exerciseTwo)
 		{   //guid later
 		    //Add workout record
 			var workout1 = new Models.Persistence.Workout
@@ -89,8 +65,10 @@ namespace Dissertation.Views.Workout
 
 			await _connection.InsertAsync(workout1);
 
-			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsByDate(_connection, date); 
-         
+			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsByDate(_connection, date);
+
+			await ExerciseAlgorithm(exerciseOne,exerciseTwo, workouts[0]);
+
 			if (workouts.Count != 1)
 			{
 				await Navigation.PushAsync(new Views.Workout.ViewWorkoutsPage());
@@ -107,6 +85,55 @@ namespace Dissertation.Views.Workout
                 Navigation.RemovePage(this);
 			}          
         }
+        
+		public async Task ExerciseAlgorithm(string exercise1, string exercise2, Models.Persistence.Workout workout) 
+		{
+			if (exercise1 != "I don't need help!" && exercise1 != "")
+			{
+				bool result = await WorkoutFactory.CheckExerciseHistory(_connection, exercise1);
+
+				if (result) 
+				{
+					bool doExerciseRecordsExist = await WorkoutFactory.CreateExerciseSets(_connection, exercise1, workout);
+
+					if (doExerciseRecordsExist == false)
+					{
+						await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
+                        await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout);          
+					}
+				} 
+				else 
+				{
+					await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
+					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout);                  
+				}
+			}
+
+			if (exercise2 != "I don't need help!" && exercise2 != "" && exercise2 != "None")
+            {
+				bool result = await WorkoutFactory.CheckExerciseHistory(_connection, exercise2);
+
+				if (result)
+                {
+					bool doExerciseRecordsExist = await WorkoutFactory.CreateExerciseSets(_connection, exercise2, workout);
+
+                    if (doExerciseRecordsExist == false)
+                    {
+                        await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
+                        await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise2, workout);
+                    }
+                }
+                else
+                {
+					await DisplayAlert("No " + exercise2 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
+					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise2, workout);
+                }
+            }
+            
+            
+
+            ///////
+		}
 
 		public bool CheckFields(DateTime date, string location, string primaryMuscleGroup, string secondaryMuscleGroup)
         {

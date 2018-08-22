@@ -96,7 +96,7 @@
                 Grid.ColumnSpan="3"
                 >
             <Picker.Items>
-                <x:String>Legs (do it!)</x:String> 
+                <x:String>Legs</x:String> 
                 <x:String>Chest</x:String>
                 <x:String>Shoulders</x:String> 
                 <x:String>Back</x:String>
@@ -112,7 +112,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="3">
             <Picker.Items>
-                <x:String>Legs (do it!)</x:String> 
+                <x:String>Legs</x:String> 
                 <x:String>Chest</x:String>
                 <x:String>Shoulders</x:String> 
                 <x:String>Back</x:String>

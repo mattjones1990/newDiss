@@ -26,11 +26,12 @@
                 Grid.Row="1"
                 Grid.Column="3"
                 Grid.ColumnSpan="1"
+                FontSize="Micro"
                 Clicked="Settings_Clicked"></Button>
 
         <Button Text="View Workouts"
                 BackgroundColor="White"
-                FontSize="Small"
+                FontSize="Micro"
                 Grid.Row="1"
                 Grid.Column="2"
                 Grid.ColumnSpan="1"
@@ -43,6 +44,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Clicked="NewWorkout_Clicked"
+                FontSize="Micro"
                 ></Button>
 
         <Button Text="Profile"
@@ -50,6 +52,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="1"
+                FontSize="Micro"
                 ></Button>
             
         
