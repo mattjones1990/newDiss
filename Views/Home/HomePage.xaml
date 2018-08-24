@@ -53,6 +53,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"
+                Clicked="Handle_Clicked"
                 ></Button>
             
         

@@ -6,7 +6,7 @@
              >
     <ContentPage.Content>
         <ListView x:Name="workoutList"
-                  ItemTapped="Handle_ItemTapped"
+                  ItemTapped="ViewExercises"
                   HasUnevenRows="true"
                   BackgroundColor="White" 
                   SeparatorColor="#06a4cc" 
@@ -17,13 +17,13 @@
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Text="Delete"
-                                      Clicked="Handle_Clicked"                                    
+                                      Clicked="DeleteWorkout"                                    
                                       IsDestructive="true"
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>
 
                             <MenuItem Text="Edit"
-                                      Clicked="Handle_Clicked_1"                                    
+                                      Clicked="EditWorkout"                                    
                                       IsDestructive="false"
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>
@@ -55,14 +55,17 @@
                             </StackLayout>
                             <Button                                 
                                 HorizontalOptions="EndAndExpand"
-                                Text="{Binding CompletedString}"  
+                                Text="{Binding CompletedString}"
+                                CommandParameter ="{Binding }"
                                 FontSize="Large"
-                                TextColor="{Binding CompletedColor}"
+                                TextColor="White"
                                 FontFamily="Boulder"
-                                BorderColor="#06a4cc"
+                                BorderColor="Black"
+                                BackgroundColor="#06a4cc"
                                 BorderWidth="2"
                                 BorderRadius="5"
-                                WidthRequest="100"/>
+                                WidthRequest="100"
+                                Clicked="CompleteWorkout"/>
                         </StackLayout>
                             <Label Text="-------------" 
                                    HorizontalOptions="Center"

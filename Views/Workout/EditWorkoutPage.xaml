@@ -119,7 +119,7 @@
                 FontSize="18"
                 FontAttributes="Bold"
                 TextColor="#06a4cc"
-                Clicked="Handle_Clicked"
+                Clicked="EditWorkout"
                 />
 
 

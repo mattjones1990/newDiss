@@ -37,7 +37,7 @@ namespace Dissertation.Views.Workout
 			LocationField.Text = workouts[0].Location;         
 		}
 
-		public async Task Handle_Clicked(object sender, System.EventArgs e)
+		public async Task EditWorkout(object sender, System.EventArgs e)
 		{
 			if (DatePicker.Date > DateTime.Now.AddDays(1000) || DatePicker.Date < DateTime.Now.AddDays(-1000)) {
                 DatePicker.BackgroundColor = Color.LightGray;

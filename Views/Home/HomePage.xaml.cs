@@ -64,6 +64,11 @@ namespace Dissertation.Views.Home
 		void Settings_Clicked(object sender, System.EventArgs eventArgs) {
 			RedirectToSettingsPage();
 		}
+
+		void Handle_Clicked(object sender, System.EventArgs e)
+		{
+			RedirectToProfilePage();
+		}
        
 		//Remove any records from the user credentials table, add a new blank 
 		//record and redirect back to the original login page
@@ -115,6 +120,11 @@ namespace Dissertation.Views.Home
         public async Task RedirectToSettingsPage()
         {
 			await Navigation.PushAsync(new Views.Home.SettingsPage());
+        }
+
+		public async Task RedirectToProfilePage()
+        {
+			await Navigation.PushAsync(new Views.Profile.ProfilePage());
         }
     }
 }

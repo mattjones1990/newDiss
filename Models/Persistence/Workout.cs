@@ -15,7 +15,7 @@ namespace Dissertation.Models.Persistence
 		[MaxLength(255)]
 		public string Location { get; set; }
 		public bool Completed { get; set; }
-		private SQLiteAsyncConnection _connection;
+		//private SQLiteAsyncConnection _connection;
         
         public Workout()
         {

@@ -76,7 +76,7 @@ namespace Dissertation.Views.Workout
          
 		}       
 
-        void Handle_Clicked(object sender, System.EventArgs e)
+        void AddSet(object sender, System.EventArgs e)
 		{
 			ExerciseList exercise = new ExerciseList()
 			{
@@ -87,24 +87,35 @@ namespace Dissertation.Views.Workout
 			Navigation.RemovePage(this);
 		}
 
-		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
+		public async Task DeleteSet(object sender, System.EventArgs e)
         {
             var menuItem = sender as MenuItem;
 			var item = menuItem.CommandParameter as SetList;
 
-            var result = await DisplayAlert("Delete Set?", "This set will be removed, are you sure you want to delete?", "Yes", "No");
+			var exercises = await Models.Persistence.Exercise.GetAllExerciseRecordsById(_connection,item.ExerciseId);
+			int workoutId = exercises[0].WorkoutId;
+            var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsById(_connection, workoutId);
 
-            if (result)
+            if (workouts[0].Completed == true)
             {
-				var sets = await Set.GetAllSetsById(_connection, item.Id);
-
-                foreach (var s in sets)
+                await DisplayAlert("Delete Set?", "This workout has been set as 'completed'. Please re-open this workout to edit or delete your sets.", "Close");
+            }
+			else 
+			{
+				var result = await DisplayAlert("Delete Set?", "This set will be removed, are you sure you want to delete?", "Yes", "No");
+				
+				if (result)
 				{
-					await _connection.DeleteAsync(s);
-				}
-          
-                OnAppearing();
-			}
+					var sets = await Set.GetAllSetsById(_connection, item.Id);
+					
+					foreach (var s in sets)
+					{
+						await _connection.DeleteAsync(s);
+					}
+					
+					OnAppearing();
+				}                
+            }
         }
 
 		public async Task EditSet(object sender, System.EventArgs e)
@@ -112,8 +123,19 @@ namespace Dissertation.Views.Workout
 			var menuItem = sender as MenuItem;
             var item = menuItem.CommandParameter as SetList;
 
-			await Navigation.PushAsync(new EditSetPage(item));
-			Navigation.RemovePage(this);
+			var exercises = await Models.Persistence.Exercise.GetAllExerciseRecordsById(_connection, item.ExerciseId);
+            int workoutId = exercises[0].WorkoutId;
+            var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsById(_connection, workoutId);
+
+            if (workouts[0].Completed == true)
+            {
+                await DisplayAlert("Edit Set?", "This workout has been set as 'completed'. Please re-open this workout to edit or delete your sets.", "Close");
+            }
+			else 
+			{
+				await Navigation.PushAsync(new EditSetPage(item));
+				Navigation.RemovePage(this);               
+            }          
 		}
     }
 }

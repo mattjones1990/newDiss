@@ -92,53 +92,83 @@ namespace Dissertation.Views.Workout
 			Navigation.RemovePage(this);
 		}
 
-		public async Task Handle_Clicked_1(object sender, System.EventArgs e)
-        {
-            var menuItem = sender as MenuItem;
-			var item = menuItem.CommandParameter as ExerciseList;
-
-            var result = await DisplayAlert("Delete Exercise?", "All related sets will also be removed, are you sure you want to delete?", "Yes", "No");
-
-            if (result)
-            {
-				var exercises = await Exercise.GetAllExerciseRecordsById(_connection, item.Id);
-               
-				List<int> exerciseInt = new List<int>();
-                foreach (var exercise in exercises)
-				{
-					exerciseInt.Add(exercise.Id);
-				}
-
-                foreach (var i in exerciseInt)
-				{
-					var sets = await Set.GetAllSetsByExerciseId(_connection, i);
-                    foreach (var s in sets)
-					{
-						await _connection.DeleteAsync(s);
-					}
-				}
-
-				foreach (var exercise in exercises)
-				{
-					await _connection.DeleteAsync(exercise);
-				}
-                
-				OnAppearing();
-			}
-		}
-
-		public async Task Handle_Clicked_2(object sender, System.EventArgs e)
+		public async Task DeleteExercise(object sender, System.EventArgs e)
 		{
 			var menuItem = sender as MenuItem;
 			var item = menuItem.CommandParameter as ExerciseList;
 
-			ExerciseList exercise = new ExerciseList()
-            {
-                Id = item.Id
-            };
+			await StopDelete(item);
+		}
+       
+		public async Task EditExercise(object sender, System.EventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            var item = menuItem.CommandParameter as ExerciseList;
 
-			await Navigation.PushAsync(new Views.Workout.EditExercisePage(exercise));
-            Navigation.RemovePage(this);
+            await StopEdit(item);
+        }
+       
+		private async Task StopDelete(ExerciseList item)
+		{
+			int workoutId = item.WorkoutId;
+			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsById(_connection, workoutId);
+
+			if (workouts[0].Completed == true)
+			{
+				await DisplayAlert("Delete Exercise?", "This workout has been set as 'completed'. Please re-open this workout to edit or delete your exercises.", "Close");
+			}
+			else
+			{
+				var result = await DisplayAlert("Delete Exercise?", "All related sets will also be removed, are you sure you want to delete?", "Yes", "No");
+
+				if (result)
+				{
+					var exercises = await Exercise.GetAllExerciseRecordsById(_connection, item.Id);
+
+					List<int> exerciseInt = new List<int>();
+					foreach (var exercise in exercises)
+					{
+						exerciseInt.Add(exercise.Id);
+					}
+
+					foreach (var i in exerciseInt)
+					{
+						var sets = await Set.GetAllSetsByExerciseId(_connection, i);
+						foreach (var s in sets)
+						{
+							await _connection.DeleteAsync(s);
+						}
+					}
+
+					foreach (var exercise in exercises)
+					{
+						await _connection.DeleteAsync(exercise);
+					}
+				}
+
+				OnAppearing();
+			}
+		}
+              
+		private async Task StopEdit(ExerciseList item)
+		{
+			int workoutId = item.WorkoutId;
+			var workouts = await Models.Persistence.Workout.GetAllWorkoutRecordsById(_connection, workoutId);
+
+			if (workouts[0].Completed == true)
+			{
+				await DisplayAlert("Edit Exercise?", "This workout has been set as 'completed'. Please re-open this workout to edit or delete your exercises.", "Close");
+			}
+			else
+			{
+				ExerciseList exercise = new ExerciseList()
+				{
+					Id = item.Id
+				};
+
+				await Navigation.PushAsync(new Views.Workout.EditExercisePage(exercise));
+				Navigation.RemovePage(this);
+			}
 		}
 	}
 }

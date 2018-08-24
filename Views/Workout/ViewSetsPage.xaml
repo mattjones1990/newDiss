@@ -7,7 +7,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Add" 
-                     Clicked="Handle_Clicked">        
+                     Clicked="AddSet">        
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     
@@ -20,7 +20,7 @@
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Text="Delete"
-                                      Clicked="Handle_Clicked_1"                                    
+                                      Clicked="DeleteSet"                                    
                                       IsDestructive="true"
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>

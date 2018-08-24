@@ -91,42 +91,42 @@ namespace Dissertation.Views.Workout
 			if (exercise1 != "I don't need help!" && exercise1 != "")
 			{
 				bool result = await WorkoutFactory.CheckExerciseHistory(_connection, exercise1);
+				var doExerciseRecordsExist = await WorkoutFactory.CreateExerciseSets(_connection, exercise1, workout);
+				DateTime date = doExerciseRecordsExist.ExerciseSetAssistantDate;
 
-				if (result) 
-				{
-					bool doExerciseRecordsExist = await WorkoutFactory.CreateExerciseSets(_connection, exercise1, workout);
-
-					if (doExerciseRecordsExist == false)
+                if (result) 
+                {
+					if (doExerciseRecordsExist.Exist == false)
 					{
 						await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
-                        await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout);          
+                        await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout,date);          
 					}
 				} 
 				else 
 				{
 					await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
-					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout);                  
+					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout,date);                  
 				}
 			}
 
 			if (exercise2 != "I don't need help!" && exercise2 != "" && exercise2 != "None")
             {
 				bool result = await WorkoutFactory.CheckExerciseHistory(_connection, exercise2);
+				var doExerciseRecordsExist = await WorkoutFactory.CreateExerciseSets(_connection, exercise2, workout);
+				DateTime date = doExerciseRecordsExist.ExerciseSetAssistantDate;
 
-				if (result)
+                if (result)
                 {
-					bool doExerciseRecordsExist = await WorkoutFactory.CreateExerciseSets(_connection, exercise2, workout);
-
-                    if (doExerciseRecordsExist == false)
+					if (doExerciseRecordsExist.Exist == false)
                     {
                         await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
-                        await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise2, workout);
+                        await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise2, workout,date);
                     }
                 }
                 else
                 {
 					await DisplayAlert("No " + exercise2 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
-					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise2, workout);
+					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise2, workout,date);
                 }
             }
             

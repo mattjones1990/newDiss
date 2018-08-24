@@ -66,5 +66,10 @@ namespace Dissertation.Models.Persistence
                                     .Where(w => w.WorkoutId == id).ToListAsync();
         }      
 	}
+
+	public class ExerciseSetAssistant {
+		public bool Exist { get; set; }
+        public DateTime ExerciseSetAssistantDate { get; set; }
+	}
 }
 

@@ -150,28 +150,31 @@ namespace Dissertation.Models
 				
 		}
 
-		public static async Task <bool>CreateExerciseSets(SQLiteAsyncConnection _connection, string exercise, Models.Persistence.Workout workout) 
+		public static async Task <Models.Persistence.ExerciseSetAssistant>CreateExerciseSets(SQLiteAsyncConnection _connection, string exercise, Models.Persistence.Workout workout)
 		{
+			Models.Persistence.ExerciseSetAssistant setAssistant = new Models.Persistence.ExerciseSetAssistant();
 			string exerciseString = GetExerciseNameString(exercise);
 			var listOfExerciseName = await Models.Persistence.ExerciseName.GetAllExerciseNameRecordsByExerciseNameString(_connection, exerciseString);
-              
-            
+
+
 			int exerciseListInt = listOfExerciseName[0].Id;
 			var exercises = await Models.Persistence.Exercise.GetAllExerciseRecordsByExerciseNameId(_connection, exerciseListInt); //Gets all exercises records for 'Bench Press' or whatever lift.
+			DateTime date = await CreateExerciseRecordForWorkout(_connection, exercise, workout);
+			setAssistant.ExerciseSetAssistantDate = date;
 
             if (exercises.Count < 1)
-			{
-				return false;
-			}
+            {
+                setAssistant.Exist = false;
+                return setAssistant;
+            }
 
-			DateTime date = await CreateExerciseRecordForWorkout(_connection, exercise, workout);
 			var exerciseRecords = await Models.Persistence.Exercise.GetAllExerciseRecordsByDate(_connection, date); //Gets the current exercise record that's just been created.                   
 			int exerciseIdForSets = exerciseRecords[0].Id; //Gets the Id for the new exercise record
 
 
 			int exForPrvSet = exercises.Count() - 1;
 			int exerciseIdForPreviousSets = exercises[exForPrvSet].Id; //Gets the ID of the latest historic exercise.
-
+			var previousExercise = exercises[exForPrvSet];
 			var setsForLastExercise = await Models.Persistence.Set.GetAllSetsByExerciseId(_connection, exerciseIdForPreviousSets); //Get the sets for the previous historic exercise
 
 
@@ -179,6 +182,7 @@ namespace Dissertation.Models
 			int repValue = 10000;
 			decimal weightValue = 10000m;
 
+			//Get the values for rep and weight of the set with the lowest reps (if any).
 			foreach (var item in setsForLastExercise)
 			{
 				if (item.Reps < repValue && item.Reps > 0)
@@ -188,40 +192,81 @@ namespace Dissertation.Models
 				}
 			}
 
-			if (repValue == 1000) 
+			//IF the highest set had zero reps, create empty sets
+			if (repValue == 10000 || weightValue == 0)
 			{
-				await CreateEmptyExerciseSets(_connection, exercise, workout);
-				return false;
+				//await CreateEmptyExerciseSets(_connection, exercise, workout);
+				setAssistant.Exist = false;
+                return setAssistant;
 			}
 
-            //CONSIDER DATES IN HERE
+			//CONSIDER DATES IN HERE
+			var dateNow = DateTime.Now;
+			var date10 = dateNow.AddDays(-10);
+			var date15 = dateNow.AddDays(-15);
+			var date20 = dateNow.AddDays(-20);
+			DateTime prv = previousExercise.DateOfExercise;
 
-			List<int> setReps = new List<int>(new int[] {12,10,8,6,4});          
-			decimal oneRepMaxEstimation = oneRepMax(weightValue + 2.5m, repValue, 2.5m, false);
-            foreach (var s in setReps)
-            {
-                //add set record
+            //TESTING
+			int testing = 0;
+			if (testing == 1)
+				prv = dateNow.AddDays(-8);
+			//
 
-                DateTime d = DateTime.Now;
+			decimal increment;
 
-                var set = new Models.Persistence.Set
-                {
-					ExerciseId = exerciseIdForSets,
-                    TimeOfSet = d,
-					Weight = weightForSet(oneRepMaxEstimation, s, 2.5m),
-                    Reps = s
-                };
-
-                await _connection.InsertAsync(set);
-                Task.Delay(100).Wait();
-            }     
-
-			return true;
+			if (prv < date20) //IF OVER 20 DAYS SINCE LAST EXERCISE
+			{
+				await CreateEmptyExerciseSets(_connection, exercise, workout, date);
+				setAssistant.Exist = false;
+                return setAssistant;
+			} 
+			else if (prv < date15) //IF BETWEEN 15-20 DAYS SINCE LAST EXERCISE
+			{
+				increment = -2.5m;
+				await CreateSetsWithValues(_connection, exerciseIdForSets, repValue, weightValue, increment);
+			} 
+			else if (prv < date10) //IF BETWEEN 10-15 DAYS SINCE LAST EXERCISE
+			{
+				increment = 0m;
+				await CreateSetsWithValues(_connection, exerciseIdForSets, repValue, weightValue, increment);
+			}
+			else //IF LESS THAN 10 DAYS SINCE LAST EXERCISE
+			{
+				increment = 2.5m;
+                await CreateSetsWithValues(_connection, exerciseIdForSets, repValue, weightValue, increment);
+			}
+			setAssistant.Exist = true;
+			//setAssistant.ExerciseSetAssistantDate = date;
+            return setAssistant;
 		}
 
-		public static async Task CreateEmptyExerciseSets(SQLiteAsyncConnection _connection, string exercise, Models.Persistence.Workout workout)
+		private static async Task CreateSetsWithValues(SQLiteAsyncConnection _connection, int exerciseIdForSets, int repValue, decimal weightValue, decimal increment)
 		{
-			DateTime date = await CreateExerciseRecordForWorkout(_connection, exercise, workout);
+			List<int> setReps = new List<int>(new int[] { 12, 10, 8, 6, 4 });
+			decimal oneRepMaxEstimation = oneRepMax(weightValue + increment, repValue, 2.5m, false);
+			foreach (var s in setReps)
+			{
+				//add set record
+
+				DateTime d = DateTime.Now;
+
+				var set = new Models.Persistence.Set
+				{
+					ExerciseId = exerciseIdForSets,
+					TimeOfSet = d,
+					Weight = weightForSet(oneRepMaxEstimation, s, 2.5m),
+					Reps = s
+				};
+
+				await _connection.InsertAsync(set);
+				Task.Delay(50).Wait();
+			}
+		}
+
+		public static async Task CreateEmptyExerciseSets(SQLiteAsyncConnection _connection, string exercise, Models.Persistence.Workout workout, DateTime date)
+		{
+			//DateTime date = await CreateExerciseRecordForWorkout(_connection, exercise, workout);
 			var exerciseRecords = await Models.Persistence.Exercise.GetAllExerciseRecordsByDate(_connection, date);
 			//var testing = await Models.Persistence.Exercise.GetAllExercise(_connection);
 			int exerciseId = exerciseRecords[0].Id;
@@ -246,6 +291,34 @@ namespace Dissertation.Models
 				Task.Delay(100).Wait();
 			}     
 		}
+
+		//public static async Task CreateEmptyExerciseSets(SQLiteAsyncConnection _connection, string exercise, Models.Persistence.Workout workout)
+        //{
+        //    DateTime date = await CreateExerciseRecordForWorkout(_connection, exercise, workout);
+        //    var exerciseRecords = await Models.Persistence.Exercise.GetAllExerciseRecordsByDate(_connection, date);
+        //    //var testing = await Models.Persistence.Exercise.GetAllExercise(_connection);
+        //    int exerciseId = exerciseRecords[0].Id;
+
+        //    List<int> setReps = new List<int>(new int[] { 12, 10, 8, 6, 4 });
+
+        //    foreach (var s in setReps)
+        //    {
+        //        //add set record
+
+        //        DateTime d = DateTime.Now;
+
+        //        var set = new Models.Persistence.Set
+        //        {
+        //            ExerciseId = exerciseId,
+        //            TimeOfSet = d,
+        //            Weight = 0m,
+        //            Reps = s
+        //        };
+
+        //        await _connection.InsertAsync(set);
+        //        Task.Delay(100).Wait();
+        //    }
+        //}
 
 		private static async Task<DateTime> CreateExerciseRecordForWorkout(SQLiteAsyncConnection _connection, string exercise, Persistence.Workout workout)
 		{

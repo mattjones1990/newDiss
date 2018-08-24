@@ -19,13 +19,13 @@
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Text="Delete"
-                                      Clicked="Handle_Clicked_1"                                    
+                                      Clicked="DeleteExercise"                                    
                                       IsDestructive="true"
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>
 
                             <MenuItem Text="Edit"
-                                      Clicked="Handle_Clicked_2"                                    
+                                      Clicked="EditExercise"                                    
                                       IsDestructive="false"
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.ProfilePage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#06a4cc"
+          ColumnSpacing="1"
+          RowSpacing="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.7*" />
+            </Grid.RowDefinitions>
+
+            <Grid BackgroundColor="#06a4cc"
+                  Grid.Row="0"
+                  RowSpacing="1"
+                  ColumnSpacing="1"
+                  >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="0.05*" />
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.1*" />                                                      
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.1*" />
+                </Grid.ColumnDefinitions>
+
+
+                <BoxView Grid.Row="0" Grid.Column="0" BackgroundColor="Red" />
+                <BoxView Grid.Row="0" Grid.Column="1" 
+                         BackgroundColor="Red"/>
+                <BoxView Grid.Row="0" Grid.Column="2" 
+                         BackgroundColor="Red" 
+                         />
+                <BoxView Grid.Row="0" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="0" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="1" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="1" Grid.Column="1" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="1" Grid.Column="2" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="1" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="1" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="1" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="2" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                <BoxView Grid.Row="2" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="2" Grid.Column="1" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="2" Grid.Column="2" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="2" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                 <BoxView Grid.Row="2" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+
+                               <BoxView Grid.Row="3" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="3" Grid.Column="1" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="3" Grid.Column="2" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="3" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                 <BoxView Grid.Row="3" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+
+                               <BoxView Grid.Row="4" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="4" Grid.Column="1" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="4" Grid.Column="2" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="4" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                 <BoxView Grid.Row="4" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+
+
+                    <BoxView Grid.Row="5" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="5" Grid.Column="1" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="5" Grid.Column="2" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="5" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                 <BoxView Grid.Row="5" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+
+
+                    <BoxView Grid.Row="6" Grid.Column="0" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="6" Grid.Column="1" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="6" Grid.Column="2" 
+                         BackgroundColor="Red"  
+                         />
+                                <BoxView Grid.Row="6" Grid.Column="3" 
+                         BackgroundColor="Red"  
+                         />
+                 <BoxView Grid.Row="6" Grid.Column="4" 
+                         BackgroundColor="Red"  
+                         />
+
+
+
+
+                
+            </Grid>
+
+            <Grid BackgroundColor="White"
+                  Grid.Row="1"
+                  RowSpacing="1"
+                  ColumnSpacing="1">
+
+                <Label Text="Previous Workouts"
+                       FontFamily="Boulder"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="Black"
+                       />
+            </Grid>
+
+            <Grid BackgroundColor="#06a4cc"
+                  Grid.Row="2"
+                  RowSpacing="1"
+                  ColumnSpacing="1">
+
+                <ListView x:Name="profileList"
+                  SeparatorColor="#Black" 
+                  SeparatorVisibility="Default">
+                    <ListView.ItemTemplate>  
+                        <DataTemplate>  
+                            <ViewCell>
+                                 <Label Text="{Binding Weights}"
+                                   FontSize="Medium" 
+                                   TextColor="Black" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="Boulder"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                                </ViewCell>
+                        </DataTemplate>  
+                    </ListView.ItemTemplate> 
+                </ListView>
+            </Grid>
+
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
