@@ -128,7 +128,9 @@ namespace Dissertation.Views.Login
                     {
 						Email = result.Email,
 						Handle = result.Handle,
-                        Password = result.Password
+                        Password = result.Password,
+						UserGuid = result.UserGuid
+						                 
                     };
 
                     await _connection.InsertAsync(newUser);
@@ -167,6 +169,19 @@ namespace Dissertation.Views.Login
                     
                     if (result2.Reason == "User created successfully.")
 					{
+						await _connection.ExecuteAsync("DELETE FROM UsersCredentials");
+
+						var newUser2 = new UsersCredentials
+                        {
+                            Email = result.Email,
+                            Handle = result.Handle,
+                            Password = result.Password,
+                            UserGuid = result2.UserGuid //assign new guid to user
+                        };
+
+                        await _connection.InsertAsync(newUser2);                      			
+
+						//var matt = await _connection.Table<UsersCredentials>().ToListAsync();
 						await Navigation.PushAsync(new Views.Home.HomePage());             
 					} 
 					else 

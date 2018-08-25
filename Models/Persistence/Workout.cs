@@ -24,27 +24,44 @@ namespace Dissertation.Models.Persistence
         
 		public static async Task<List<Workout>> GetAllWorkouts(SQLiteAsyncConnection _connection)
         {
-            return await _connection.Table<Workout>().ToListAsync();
+			var users = await UsersCredentials.GetAllUsers(_connection);
+            var user = users[0];
+
+			return await _connection.Table<Workout>()
+				                    .Where(g => g.UserGuid == user.UserGuid)
+				                    .ToListAsync();
         }
 
 		public static async Task<List<Workout>> GetAllWorkoutRecordsById(SQLiteAsyncConnection _connection, int workoutId)
         {
+			var users = await UsersCredentials.GetAllUsers(_connection);
+            var user = users[0];
+
             return await _connection.Table<Workout>()
                                     .Where(en => en.Id == workoutId)
+				                    .Where(g => g.UserGuid == user.UserGuid)
                                     .ToListAsync();
         }
 
 		public static async Task<List<Workout>> GetAllWorkoutRecordsInDescendingOrder(SQLiteAsyncConnection _connection)
         {
+			var users = await UsersCredentials.GetAllUsers(_connection);
+			var user = users[0];
+
 			return await _connection.Table<Models.Persistence.Workout>()
+				                    .Where(g => g.UserGuid == user.UserGuid)
                                     .OrderByDescending(w => w.WorkoutDate)
                                     .ToListAsync();
         }
 
 		public static async Task<List<Workout>> GetAllWorkoutRecordsByDate(SQLiteAsyncConnection _connection, DateTime date)
         {
+			var users = await UsersCredentials.GetAllUsers(_connection);
+            var user = users[0];
+
 			return await _connection.Table<Models.Persistence.Workout>()
                                     .Where(w => w.WorkoutDate == date)
+				                    .Where(g => g.UserGuid == user.UserGuid)
 				                    .ToListAsync();
         }
     }

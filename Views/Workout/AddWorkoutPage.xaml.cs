@@ -55,12 +55,17 @@ namespace Dissertation.Views.Workout
 
         public async Task AddWorkoutToInternalDb(DateTime date, string location, string exerciseOne, string exerciseTwo)
 		{   //guid later
-		    //Add workout record
+			//Add workout record
+
+			var users = await Models.Persistence.UsersCredentials.GetAllUsers(_connection);
+			var user = users[0]; //SHOULD NEVER BE A CASE WHERE THIS FAILS. MAYBE NEED TO ADD VALIDATION IN THE FUTURE
+
 			var workout1 = new Models.Persistence.Workout
 			{
 				WorkoutDate = date,
 				Location = location,
-				Completed = false
+				Completed = false,
+				UserGuid = user.UserGuid
 			};
 
 			await _connection.InsertAsync(workout1);
@@ -98,13 +103,13 @@ namespace Dissertation.Views.Workout
                 {
 					if (doExerciseRecordsExist.Exist == false)
 					{
-						await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
+						await DisplayAlert("No " + exercise1 + " History Found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
                         await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout,date);          
 					}
 				} 
 				else 
 				{
-					await DisplayAlert("No " + exercise1 + " history found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
+					await DisplayAlert("No " + exercise1 + " History Found!", "Please complete sets of 12,10,8,6,4 repetitions for this exercise for the application to generate future workouts.", "Ok");
 					await WorkoutFactory.CreateEmptyExerciseSets(_connection, exercise1, workout,date);                  
 				}
 			}

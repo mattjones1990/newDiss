@@ -73,20 +73,26 @@ namespace Dissertation.Views.Home
 		//Remove any records from the user credentials table, add a new blank 
 		//record and redirect back to the original login page
 		public async Task CheckLogin() {
-            await _connection.ExecuteAsync("DELETE FROM UsersCredentials"); //Remove all data
-            var newUser = new UsersCredentials
-            {
-                //Email = "mattjones1990@hotmail.co.uk",
-                //Handle = "mj0nes6",
-                //Password = "Aite123!"
-                Email = "",
-                Handle = "",
-                Password = ""
-            };
 
-            await _connection.InsertAsync(newUser);                         //Add new data
-            await Navigation.PushAsync(new Views.Login.LoginPage());        //Redirect to login page
-            return;      
+			var result = await DisplayAlert("Log Out?", "Are you sure you want to log out?", "Yes","No");
+
+            if (result)
+			{
+				await _connection.ExecuteAsync("DELETE FROM UsersCredentials"); //Remove all data
+				var newUser = new UsersCredentials
+				{
+					//Email = "mattjones1990@hotmail.co.uk",
+					//Handle = "mj0nes6",
+					//Password = "Aite123!"
+					Email = "",
+					Handle = "",
+					Password = ""
+				};
+				
+				await _connection.InsertAsync(newUser);                         //Add new data
+				await Navigation.PushAsync(new Views.Login.LoginPage());        //Redirect to login page
+				return;
+            }
         }
 
 		public async Task RedirectToWorkoutsPage()

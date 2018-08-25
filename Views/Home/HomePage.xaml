@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="7*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -21,9 +22,41 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Button Text="Settings"
+        <Button Text="Logout"
                 BackgroundColor="White"
                 Grid.Row="1"
+                Grid.Column="3"
+                Grid.ColumnSpan="1"
+                FontSize="Micro"
+                Clicked="Logout_Click"></Button>
+
+        <Button Text="Two"
+                BackgroundColor="White"
+                FontSize="Micro"
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="1"
+                ></Button>
+            
+        <Button Text="Three"
+                BackgroundColor="White"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="1"
+                FontSize="Micro"
+                ></Button>
+
+        <Button Text="Four"
+                BackgroundColor="White"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="1"
+                FontSize="Micro"></Button>
+
+            
+        <Button Text="Settings"
+                BackgroundColor="White"
+                Grid.Row="2"
                 Grid.Column="3"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"
@@ -32,7 +65,7 @@
         <Button Text="View Workouts"
                 BackgroundColor="White"
                 FontSize="Micro"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Clicked="ViewWorkouts_Click"
@@ -40,7 +73,7 @@
             
         <Button Text="New Workout"
                 BackgroundColor="White"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Clicked="NewWorkout_Clicked"
@@ -49,7 +82,7 @@
 
         <Button Text="Profile"
                 BackgroundColor="White"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"
@@ -60,25 +93,5 @@
     </Grid>
 
       </ContentPage.Content>
-   <!-- <Button Text="Homepage Logout Test" 
-            VerticalOptions="Start"
-            HorizontalOptions="Center"
-            Clicked="Logout_Click">
-    </Button>
-
-    <Button Text="About the App" 
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Clicked="About_Click">
-    </Button>
-
-    <Button Text="View Workouts" 
-            VerticalOptions="End"
-            HorizontalOptions="Center"
-            Clicked="ViewWorkouts_Click">
-    </Button>-->
-        
-<!--    <Label Text="HomePage" VerticalTextAlignment="Center"
-           HorizontalTextAlignment="Center"></Label>-->
    
 </ContentPage>

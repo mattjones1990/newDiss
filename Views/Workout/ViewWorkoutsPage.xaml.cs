@@ -37,7 +37,7 @@ namespace Dissertation.Views.Workout
 				workoutFromSqlite.Id = w.Id;
 				//workoutFromSqlite.Completed = w.Completed;
 
-				workoutFromSqlite.WorkoutDate = w.WorkoutDate;//.ToLocalTime();   
+				workoutFromSqlite.WorkoutDate = w.WorkoutDate; //.ToLocalTime();   
 				workoutFromSqlite.Location = w.Location;
 				workoutFromSqlite.Completed = w.Completed;
 
@@ -105,7 +105,9 @@ namespace Dissertation.Views.Workout
 					
 					if (online)
 					{
-						//do complex shit  
+						var submittedWorkouts = await Models.OnlineWorkoutFromPhone.PublishWorkoutOnline(_connection,item.Id);
+						await DisplayAlert("Success!", "Workout Published Online", "Ok");
+                    
 					}					
 					CompletedWorkout(item);					
 				}
@@ -128,7 +130,7 @@ namespace Dissertation.Views.Workout
 			Models.Persistence.Workout workout = new Models.Persistence.Workout()
 			{
 				Id = item.Id,
-				WorkoutDate = DateTime.Now,
+				WorkoutDate = item.WorkoutDate,
 				Completed = item.Completed,
 				Location = item.Location
 			};

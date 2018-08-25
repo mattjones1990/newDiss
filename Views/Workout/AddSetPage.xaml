@@ -50,7 +50,6 @@
                FontAttributes="Bold"
                TextColor="White"/>
 
-
         <Picker x:Name="Weight"
                 Title="Select Weight"             
                 FontFamily="Boulder" 
@@ -59,8 +58,7 @@
                 HorizontalOptions="FillAndExpand"
                 Grid.Row="3" 
                 Grid.Column="2"
-                Grid.ColumnSpan="3"
-                >
+                Grid.ColumnSpan="3">
             <Picker.Items>
             </Picker.Items>
         </Picker> 
@@ -73,8 +71,7 @@
                 HorizontalOptions="FillAndExpand"
                 Grid.Row="4" 
                 Grid.Column="2"
-                Grid.ColumnSpan="3"
-                >
+                Grid.ColumnSpan="3">
             <Picker.Items>
             </Picker.Items>
         </Picker> 
@@ -88,11 +85,9 @@
                 FontSize="18"
                 FontAttributes="Bold"
                 TextColor="#06a4cc"
-                Clicked="Handle_Clicked"
-                />
+                Clicked="Handle_Clicked"/>
 
-            <Label 
-               x:Name="ExerciseHistoryLabel"
+            <Label x:Name="ExerciseHistoryLabel"
                Text = "Input variables to see your history for this exercise"
                Grid.Row="5" 
                Grid.RowSpan="3"
@@ -104,7 +99,6 @@
                FontSize="14"
                FontAttributes="Bold"
                TextColor="White"/>
-
     </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -39,18 +39,28 @@ namespace Dissertation.Views.Workout
 
 		public async Task EditWorkout(object sender, System.EventArgs e)
 		{
-			if (DatePicker.Date > DateTime.Now.AddDays(1000) || DatePicker.Date < DateTime.Now.AddDays(-1000)) {
+			if (DatePicker.Date > DateTime.Now.AddDays(1000) || DatePicker.Date < DateTime.Now.AddDays(-1000)) 
+			{
                 DatePicker.BackgroundColor = Color.LightGray;
                 DisplayAlert("Invalid Date", "Please insert a realistic date", "Ok");
-			} else if (String.IsNullOrEmpty(LocationField.Text)) {
+			} 
+			else if (String.IsNullOrEmpty(LocationField.Text)) 
+			{
 				LocationField.BackgroundColor = Color.LightGray;
                 DisplayAlert("Invalid Location", "Please insert a valid location for your workout", "Ok");
-			} else {
+			} 
+			else 
+			{
+				var users = await Models.Persistence.UsersCredentials.GetAllUsers(_connection);
+                var user = users[0]; //SHOULD NEVER BE A CASE WHERE THIS FAILS. MAYBE NEED TO ADD VALIDATION IN THE FUTURE
+
 				Models.Persistence.Workout workout = new Models.Persistence.Workout()
 				{
 					Id = WorkoutId,
 					WorkoutDate = DatePicker.Date,
-					Location = LocationField.Text
+					Location = LocationField.Text,
+					Completed = false,
+					UserGuid = user.UserGuid
 				};
 
 				_connection.UpdateAsync(workout);

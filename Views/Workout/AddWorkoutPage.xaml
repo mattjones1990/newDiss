@@ -24,22 +24,9 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.7*" />
         </Grid.ColumnDefinitions>
-
-        <!--<Frame CornerRadius="36" 
-               Margin="0" 
-               Padding="0" 
-               IsClippedToBounds="true"
-               Grid.Row="1"
-               Grid.Column="1"
-               HorizontalOptions="Center"
-               VerticalOptions="Center">
-           
-            <Image  Source="" 
-                    Grid.Row="1" 
-                    Grid.Column="1"/>
-        </Frame>-->
-           
+                  
            <Label 
                Text = "New Workout Details"
                Grid.Row="0" 
@@ -52,15 +39,6 @@
                FontAttributes="Bold"
                TextColor="White"/>
 
-<!--           <Entry Placeholder="Workout Date"                 
-                  FontFamily="Boulder"
-                  FontSize="Medium" 
-                  HorizontalTextAlignment="Center"
-                  x:Name="EmailField" 
-                  Grid.Row="2" 
-                  Grid.Column="2"
-                  Grid.ColumnSpan="3"/>-->
-
            <DatePicker Format="D"
                        x:Name="DatePicker"
                        Grid.Row="2" 
@@ -68,9 +46,7 @@
                        Grid.ColumnSpan="3"
                        VerticalOptions="FillAndExpand"
                        HorizontalOptions="FillAndExpand"
-                       FontFamily="Boulder"
-
-                       />
+                       FontFamily="Boulder"/>
             
            <Entry Placeholder="Location"
                   FontFamily="Boulder"
@@ -93,8 +69,7 @@
                 HorizontalOptions="FillAndExpand"
                 Grid.Row="4" 
                 Grid.Column="2"
-                Grid.ColumnSpan="3"
-                >
+                Grid.ColumnSpan="3">
             <Picker.Items>
                 <x:String>Legs</x:String> 
                 <x:String>Chest</x:String>
@@ -120,21 +95,6 @@
             </Picker.Items>
         </Picker> 
 
-
-
-
-
-
-            
-<!--           <Entry Placeholder="Primary Muscle Group*"
-                  FontFamily="Boulder"             
-                  FontSize="Medium"
-                  HorizontalTextAlignment="Center"
-                  x:Name="MuscleGroupField" 
-                  Grid.Row="4" 
-                  Grid.Column="2"
-                  Grid.ColumnSpan="3"/>-->
-
             <Button Text="Add Workout"
                 BackgroundColor="White"
                 Font="Medium"
@@ -146,9 +106,7 @@
                 TextColor="#06a4cc"
                 Clicked="Handle_Clicked"/>
 
-
-            <Label 
-               Text = "*selecting a primary/secondary muscle group will allow the app to suggest what weight/reps you should be completing for your compound lifts."
+            <Label Text = "*selecting a primary/secondary muscle group will allow the app to suggest what weight/reps you should be completing for your compound lifts."
                Grid.Row="8" 
                Grid.Column="1" 
                Grid.ColumnSpan="5"
@@ -159,17 +117,6 @@
                FontAttributes="Bold"
                TextColor="White"/>
 
-            
-<!--            <Button Text="Register"
-                BackgroundColor="White"
-                Font="Medium"
-                Grid.Row="6" 
-                Grid.Column="4"
-                Grid.ColumnSpan="2"
-                FontFamily="Boulder"
-                FontSize="18"
-                FontAttributes="Bold"
-                TextColor="#06a4cc"/>-->
     </Grid>
     </ContentPage.Content>
 </ContentPage>
