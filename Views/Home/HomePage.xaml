@@ -24,7 +24,7 @@
 
         <Button Text="Logout"
                 BackgroundColor="White"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="3"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"
@@ -33,14 +33,14 @@
         <Button Text="Two"
                 BackgroundColor="White"
                 FontSize="Micro"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="2"
                 Grid.ColumnSpan="1"
                 ></Button>
             
         <Button Text="Three"
                 BackgroundColor="White"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="1"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"
@@ -49,7 +49,7 @@
         <Button Text="Four"
                 BackgroundColor="White"
                 Grid.Row="1"
-                Grid.Column="0"
+                Grid.Column="3"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"></Button>
 
@@ -57,7 +57,7 @@
         <Button Text="Settings"
                 BackgroundColor="White"
                 Grid.Row="2"
-                Grid.Column="3"
+                Grid.Column="0"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"
                 Clicked="Settings_Clicked"></Button>
@@ -65,7 +65,7 @@
         <Button Text="View Workouts"
                 BackgroundColor="White"
                 FontSize="Micro"
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Clicked="ViewWorkouts_Click"
@@ -73,7 +73,7 @@
             
         <Button Text="New Workout"
                 BackgroundColor="White"
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Clicked="NewWorkout_Clicked"
@@ -82,7 +82,7 @@
 
         <Button Text="Profile"
                 BackgroundColor="White"
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="1"
                 FontSize="Micro"

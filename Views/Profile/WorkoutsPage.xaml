@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Profile.WorkoutsPage" Title="Submitted Workouts">
+    <ContentPage.Content>
+        <ListView x:Name="ViewWorkouts" ItemTapped="ViewProfile"  HasUnevenRows="true" BackgroundColor="White" SeparatorColor="#06a4cc" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <StackLayout>
+                                    <Label Text="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}" FontSize="Small" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" />
+                                    <Label Text="{Binding Handle}" BindingContext="{Binding }" FontSize="Large" TextColor="#06a4cc" FontAttributes="Bold" FontFamily="Boulder"/>
+                                </StackLayout>
+                                <Button HorizontalOptions="EndAndExpand" Text="View" FontSize="Large" TextColor="White" CommandParameter="{Binding }" FontFamily="Boulder" BorderColor="White" BackgroundColor="#06a4cc" BorderWidth="2" BorderRadius="5"
+                                    WidthRequest="100" Clicked="ViewWorkout" />
+                            </StackLayout>
+                            <Label Text="-------------" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#06a4cc" FontSize="Small" FontFamily="Boulder" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

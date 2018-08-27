@@ -119,8 +119,8 @@ namespace Dissertation.Views.Workout
 			}
 		}
 
-		public async Task AddExerciseToInternalDb(string pickerListString) {
-
+		public async Task AddExerciseToInternalDb(string pickerListString) 
+		{
 			var exerciseId = await ExerciseName.GetAllExerciseNameRecordsByExerciseNameString(_connection, pickerListString);
            
 			if (exerciseId.Count > 1)

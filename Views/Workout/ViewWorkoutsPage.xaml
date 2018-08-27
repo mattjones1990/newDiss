@@ -60,7 +60,7 @@
                                 FontSize="Large"
                                 TextColor="White"
                                 FontFamily="Boulder"
-                                BorderColor="Black"
+                                BorderColor="White"
                                 BackgroundColor="#06a4cc"
                                 BorderWidth="2"
                                 BorderRadius="5"

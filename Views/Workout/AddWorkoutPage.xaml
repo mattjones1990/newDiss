@@ -1,122 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="Dissertation.Views.Workout.AddWorkoutPage"
-             Title="Add Workout">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Workout.AddWorkoutPage" Title="Add Workout">
     <ContentPage.Content>
         <Grid BackgroundColor="#06a4cc">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.7*" />
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.7*" />
-            <ColumnDefinition Width="0.7*" />
-        </Grid.ColumnDefinitions>
-                  
-           <Label 
-               Text = "New Workout Details"
-               Grid.Row="0" 
-               Grid.Column="2" 
-               Grid.ColumnSpan="3"
-               HorizontalTextAlignment="Center" 
-               VerticalTextAlignment="End"
-               FontFamily="Boulder"
-               FontSize="18"
-               FontAttributes="Bold"
-               TextColor="White"/>
-
-           <DatePicker Format="D"
-                       x:Name="DatePicker"
-                       Grid.Row="2" 
-                       Grid.Column="2" 
-                       Grid.ColumnSpan="3"
-                       VerticalOptions="FillAndExpand"
-                       HorizontalOptions="FillAndExpand"
-                       FontFamily="Boulder"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.7*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.7*" />
+            </Grid.ColumnDefinitions>
             
-           <Entry Placeholder="Location"
-                  FontFamily="Boulder"
-                  FontSize="Medium" 
-                  HorizontalTextAlignment="Left"
-                  VerticalOptions="FillAndExpand"
-                  HorizontalOptions="FillAndExpand"
-                  x:Name="LocationField"
-                  Grid.Row="3" 
-                  Grid.Column="2" 
-                  Grid.ColumnSpan="3"
-                  IsPassword="false"/>
+            <Label Text="New Workout Details" 
+                   Grid.Row="0" Grid.Column="2" 
+                   Grid.ColumnSpan="4" 
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center" 
+                   FontFamily="Boulder" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="White" />
+            
+            <DatePicker Format="D" 
+                        x:Name="DatePicker" 
+                        Grid.Row="2" 
+                        Grid.Column="2" 
+                        Grid.ColumnSpan="4" 
+                        VerticalOptions="FillAndExpand" 
+                        HorizontalOptions="FillAndExpand" 
+                        FontFamily="Boulder" />
 
-        <Picker x:Name="MuscleGroupPicker1"
-                Title="Primary Muscle Group"
-                
-                FontFamily="Boulder" 
-                FontSize="Medium"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand"
-                Grid.Row="4" 
-                Grid.Column="2"
-                Grid.ColumnSpan="3">
-            <Picker.Items>
-                <x:String>Legs</x:String> 
-                <x:String>Chest</x:String>
-                <x:String>Shoulders</x:String> 
-                <x:String>Back</x:String>
-                <x:String>I don't need help!</x:String>
-            </Picker.Items>
-        </Picker> 
-
-        <Picker x:Name="MuscleGroupPicker2"
-                Title="Secondary Muscle Group"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand"
-                Grid.Row="5" 
-                Grid.Column="2"
-                Grid.ColumnSpan="3">
-            <Picker.Items>
-                <x:String>Legs</x:String> 
-                <x:String>Chest</x:String>
-                <x:String>Shoulders</x:String> 
-                <x:String>Back</x:String>
-                <x:String>None</x:String>
-            </Picker.Items>
-        </Picker> 
-
-            <Button Text="Add Workout"
-                BackgroundColor="White"
-                Font="Medium"
-                Grid.Row="7" 
-                Grid.Column="2"
-                Grid.ColumnSpan="3"
-                FontSize="18"
-                FontAttributes="Bold"
-                TextColor="#06a4cc"
-                Clicked="Handle_Clicked"/>
-
-            <Label Text = "*selecting a primary/secondary muscle group will allow the app to suggest what weight/reps you should be completing for your compound lifts."
-               Grid.Row="8" 
-               Grid.Column="1" 
-               Grid.ColumnSpan="5"
-               HorizontalTextAlignment="Center" 
-               VerticalTextAlignment="End"
-               FontFamily="Boulder"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="White"/>
-
-    </Grid>
+            <Entry Placeholder="Location" 
+                   FontFamily="Boulder" 
+                   FontSize="Medium" 
+                   HorizontalTextAlignment="Left" 
+                   VerticalOptions="FillAndExpand" 
+                   HorizontalOptions="FillAndExpand" 
+                   x:Name="LocationField" 
+                   Grid.Row="3" 
+                   Grid.Column="2" 
+                   Grid.ColumnSpan="4"
+                   IsPassword="false" />
+            
+            <Picker x:Name="MuscleGroupPicker1" 
+                    Title="Primary Muscle Group" 
+                    FontFamily="Boulder" 
+                    FontSize="Medium" 
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="FillAndExpand" 
+                    Grid.Row="4" 
+                    Grid.Column="2" 
+                    Grid.ColumnSpan="4">
+                <Picker.Items>
+                    <x:String>Legs</x:String>
+                    <x:String>Chest</x:String>
+                    <x:String>Shoulders</x:String>
+                    <x:String>Back</x:String>
+                    <x:String>I don't need help!</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            <Picker x:Name="MuscleGroupPicker2" 
+                    Title="Secondary Muscle Group" 
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="FillAndExpand" 
+                    Grid.Row="5" 
+                    Grid.Column="2" 
+                    Grid.ColumnSpan="4">
+                <Picker.Items>
+                    <x:String>Legs</x:String>
+                    <x:String>Chest</x:String>
+                    <x:String>Shoulders</x:String>
+                    <x:String>Back</x:String>
+                    <x:String>None</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            <Button Text="Add Workout" 
+                    BackgroundColor="White" 
+                    Font="Medium" 
+                    Grid.Row="7" 
+                    Grid.Column="2" 
+                    Grid.ColumnSpan="4" 
+                    FontSize="18" 
+                    FontAttributes="Bold" 
+                    TextColor="#06a4cc" 
+                    Clicked="WorkoutButton" />
+            
+            <Label Text="*selecting a primary/secondary muscle group will allow the app to suggest what weight/reps you should be completing for your compound lifts." 
+                   Grid.Row="8" 
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="6" 
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Start" 
+                   FontFamily="Boulder" 
+                   FontSize="14" 
+                   FontAttributes="Bold" 
+                   TextColor="White" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

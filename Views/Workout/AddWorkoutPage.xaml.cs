@@ -29,7 +29,7 @@ namespace Dissertation.Views.Workout
             
 		}
 
-		void Handle_Clicked(object sender, System.EventArgs e)
+		void WorkoutButton(object sender, System.EventArgs e)
 		{
 			string pickerOne = "";
 			string pickerTwo = "";

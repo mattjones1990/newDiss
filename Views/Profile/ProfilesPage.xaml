@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.ProfilesPage"
+             Title="Search Profiles">
+    
+    <ContentPage.Content>
+        <Grid BackgroundColor="#06a4cc" ColumnSpacing="1" RowSpacing="1">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="0" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Profile Search:" 
+                   Grid.Row="1" 
+                   Grid.Column="0" 
+                   TextColor="White" 
+                   FontFamily="Boulder"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+                
+                <Entry x:Name="HandleEntry" 
+                   FontFamily="Boulder" 
+                   Grid.Row="1" 
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="Center" 
+                   WidthRequest="230" 
+                   TextChanged="Handle_TextChanged"/>
+                                  
+            </Grid>
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="1" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <ListView x:Name="ListOfProfiles" 
+                          HasUnevenRows="true" 
+                          BackgroundColor="White" 
+                          SeparatorColor="#06a4cc" 
+                          SeparatorVisibility="None"
+                          ItemTapped="SelectedUserHandle">
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                
+                                <Frame Padding="5" 
+                                       HasShadow="false">
+                                    
+                                    <StackLayout>
+                                        <Label  Text="{Binding }" 
+                                                BindingContext="{Binding }" 
+                                                FontSize="Large" 
+                                                TextColor="#06a4cc" 
+                                                FontAttributes="Bold" 
+                                                FontFamily="Boulder"/>
+                                    </StackLayout>
+                                    
+                                </Frame>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

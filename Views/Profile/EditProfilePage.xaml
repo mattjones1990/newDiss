@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.EditProfilePage"
+             Title="Edit Workout">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#06a4cc" Grid.Row="0" RowSpacing="1" ColumnSpacing="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="0.4*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="Name:" 
+                   Grid.Row="0" 
+                   Grid.Column="1" 
+                   TextColor="White" 
+                   FontFamily="Boulder" 
+                   VerticalTextAlignment="Center" />
+            <Label Text="Age:" 
+                   Grid.Row="1" 
+                   Grid.Column="1" 
+                   TextColor="White" 
+                   FontFamily="Boulder" 
+                   VerticalTextAlignment="Center" />
+            <Label Text="Location:" 
+                   Grid.Row="2" 
+                   Grid.Column="1" 
+                   TextColor="White" 
+                   FontFamily="Boulder" 
+                   VerticalTextAlignment="Center" />
+            <Label Text="Bio:" 
+                   Grid.Row="3" 
+                   Grid.Column="1" 
+                   TextColor="White" 
+                   FontFamily="Boulder" />
+            
+            <Entry x:Name="NameEntry" 
+                   FontFamily="Boulder" 
+                   Grid.Row="0" 
+                   Grid.Column="2" 
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="Center" 
+                   WidthRequest="230"
+                   TextChanged="TextChanged"/>
+            
+            <Entry x:Name="AgeEntry" 
+                   FontFamily="Boulder" 
+                   Grid.Row="1" 
+                   Grid.Column="2" 
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="Center" 
+                   WidthRequest="230" 
+                   TextChanged="TextChanged"/>
+            
+            <Entry x:Name="LocationEntry" 
+                   FontFamily="Boulder" 
+                   Grid.Row="2" 
+                   Grid.Column="2" 
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="Center" 
+                   WidthRequest="230" 
+                   TextChanged="TextChanged"/>
+            
+            <Editor x:Name="BioEditor" 
+                    Grid.Row="3" 
+                    Grid.Column="2" 
+                    TextChanged="TextChanged"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+<!--                <Label  x:Name="BioLabel"
+                        HorizontalTextAlignment="Start" 
+                        VerticalTextAlignment="Start"
+                        Text="Bio: " 
+                        FontSize="Small" 
+                        TextColor="White" 
+                        FontFamily="Boulder"
+                        BackgroundColor="#06a4cc" 
+                        Grid.Row="5" 
+                        Grid.Column="1"
+                        Grid.ColumnSpan="4"/>-->

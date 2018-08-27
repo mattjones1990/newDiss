@@ -106,7 +106,7 @@ namespace Dissertation.Views.Login
             login.Active = 1;
             login.Email = Models.Security.Encrypt(Models.Security.Encrypt(email, k), k);
             login.Password = Models.Security.Encrypt(Models.Security.Encrypt(password, k), k);
-            login.Handle = Models.Security.Encrypt(Models.Security.Encrypt(handle, k), k);
+			login.Handle = handle;//Models.Security.Encrypt(Models.Security.Encrypt(handle, k), k);
             //login.UserGuid = new Guid("382F42CF-51A0-4658-A1D8-177FCB74AF98");//localUserInfo.UserGuid;
 			login.Reason = reason; //"CheckIfSqliteInAzure";
 

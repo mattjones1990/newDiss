@@ -40,6 +40,7 @@ namespace Dissertation.Views.Workout
 				workoutFromSqlite.WorkoutDate = w.WorkoutDate; //.ToLocalTime();   
 				workoutFromSqlite.Location = w.Location;
 				workoutFromSqlite.Completed = w.Completed;
+				workoutFromSqlite.UserGuid = w.UserGuid;
 
 				if (w.Completed == true)
 				{
@@ -132,7 +133,8 @@ namespace Dissertation.Views.Workout
 				Id = item.Id,
 				WorkoutDate = item.WorkoutDate,
 				Completed = item.Completed,
-				Location = item.Location
+				Location = item.Location,
+				UserGuid = item.UserGuid
 			};
 
 			_connection.UpdateAsync(workout);

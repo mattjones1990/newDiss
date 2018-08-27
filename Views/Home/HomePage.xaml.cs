@@ -81,9 +81,6 @@ namespace Dissertation.Views.Home
 				await _connection.ExecuteAsync("DELETE FROM UsersCredentials"); //Remove all data
 				var newUser = new UsersCredentials
 				{
-					//Email = "mattjones1990@hotmail.co.uk",
-					//Handle = "mj0nes6",
-					//Password = "Aite123!"
 					Email = "",
 					Handle = "",
 					Password = ""
@@ -113,14 +110,6 @@ namespace Dissertation.Views.Home
 		public async Task RedirectToNewWorkoutPage()
         {
 			await Navigation.PushAsync(new Views.Workout.AddWorkoutPage());
-
-            
-			//await Navigation.PushAsync(new NavigationPage(new Views.Workout.AddWorkoutPage())
-            //{
-            //    BarBackgroundColor = Color.FromHex("#06a4cc"),
-            //    BarTextColor = Color.White
-
-            //});
         }
                
         public async Task RedirectToSettingsPage()
