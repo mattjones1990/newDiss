@@ -74,6 +74,7 @@ namespace Dissertation.Models
             var content = new StringContent(data, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(url, content);
             var result = JsonConvert.DeserializeObject<OnlineWorkoutFromPhone>(response.Content.ReadAsStringAsync().Result);
+			o.Reason = result.Reason;
             return o;
 		}
 

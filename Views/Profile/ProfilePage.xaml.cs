@@ -60,7 +60,7 @@ namespace Dissertation.Views.Profile
 			LocationLabel.Text = "Location: " + result.Location;
 			NameLabel.Text = result.Name;
 			BioLabel2.Text = result.Bio;
-			AgeLabel.Text = "Age:" + result.Age.ToString();
+			AgeLabel.Text = "Age: " + result.Age.ToString();
 
 
 			//CREATE OBJECT FOR EDIT PROFILE PAGE        
@@ -104,7 +104,7 @@ namespace Dissertation.Views.Profile
                 }
 
                 //
-                List<string> fullListOfStrings = await ExerciseName.GetListOfExerciseStrings(_connection, w);
+				List<string> fullListOfStrings = await ExerciseName.GetListOfExerciseStrings(_connection, w);
                 string musclegroups = "";
                 if (musclegroups == "" && fullListOfStrings.Count() == 0)
                 {
@@ -120,11 +120,13 @@ namespace Dissertation.Views.Profile
 
                 int muscleGroupLength = musclegroups.Length - 1;
                 char muscleGroupLastChar = musclegroups[muscleGroupLength];
+                string muscleGroupFinal = "";
                 if (muscleGroupLastChar == '/')
                 {
-                    musclegroups.Remove(muscleGroupLength, 1);
+                    //musclegroups.Remove(muscleGroupLength, 1);
+                    muscleGroupFinal = musclegroups.Remove(musclegroups.Length - 1);
                 }
-                workoutFromSqlite.MuscleGroups = musclegroups;
+                workoutFromSqlite.MuscleGroups = muscleGroupFinal;
 
                 ListOfWorkouts.Add(workoutFromSqlite);
             }

@@ -2,33 +2,44 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Dissertation.Views.Workout.ViewSetsPage"
-             Title="{Binding PageTitle}"
-             >
+             Title="{Binding PageTitle}">
 
     <ContentPage.ToolbarItems>
+        
         <ToolbarItem Name="Add" 
                      Clicked="AddSet">        
         </ToolbarItem>
+        
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
+        
         <ListView x:Name="setList"
                   SeparatorColor="#06a4cc" 
                   SeparatorVisibility="Default">
+            
             <ListView.ItemTemplate>  
+                
                 <DataTemplate>  
+                    
                     <ViewCell>
+                        
                         <ViewCell.ContextActions>
+                            
                             <MenuItem Text="Delete"
                                       Clicked="DeleteSet"                                    
                                       IsDestructive="true"
-                                      CommandParameter="{Binding .}">                              
+                                      CommandParameter="{Binding .}"> 
+                                
                             </MenuItem>
+                            
                             <MenuItem Text="Edit"
                                       Clicked="EditSet"                                    
                                       IsDestructive="false"
-                                      CommandParameter="{Binding .}">                              
+                                      CommandParameter="{Binding .}">   
+                                
                             </MenuItem>
+                            
                         </ViewCell.ContextActions>
 
 
@@ -38,12 +49,13 @@
                                      Padding="5">
                         <StackLayout>
 
-                            <Label Text="{Binding SetNumber,StringFormat='({0})'}"
-                                   FontSize="Large" 
+                            <Label Text="{Binding SetNumber,StringFormat='{0} - '}"
+                                   FontSize="Medium" 
                                    TextColor="Black" 
                                    FontAttributes="Bold" 
                                    FontFamily="Boulder"
-                                   HorizontalTextAlignment="Center"/>
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
 
                            
                             
@@ -60,6 +72,7 @@
                             <Label Text="{Binding Reps, StringFormat='Reps: {0}'}"
                                    FontSize="Medium"
                                    HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="Center"
                                    TextColor="Black" 
                                    FontAttributes="Bold" 
                                    FontFamily="Boulder"/>
@@ -73,17 +86,16 @@
                                    FontSize="Small"
                                    FontFamily="Boulder"/> 
                         </StackLayout>
-                                              
-
-
-
-
-
-                        
-                   
+                     
+                                                          
                     </ViewCell>
+                    
                 </DataTemplate>  
+                
             </ListView.ItemTemplate> 
+            
         </ListView>
+        
     </ContentPage.Content>
+    
 </ContentPage>

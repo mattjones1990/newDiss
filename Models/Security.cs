@@ -8,7 +8,7 @@ namespace Dissertation.Models
 {
 	public class Security
     {
-        private static readonly byte[] salt = Encoding.ASCII.GetBytes("Gwilliam");
+        private static readonly byte[] salt = Encoding.ASCII.GetBytes("SaltHere");
         internal static string Encrypt(string textToEncrypt, string encryptionPassword)
         {
             var algorithm = GetAlgorithm(encryptionPassword);
@@ -48,6 +48,7 @@ namespace Dissertation.Models
             }
             return memory.ToArray();
         }
+
         private static RijndaelManaged GetAlgorithm(string encryptionPassword)
         {
             var key = new Rfc2898DeriveBytes(encryptionPassword, salt);

@@ -64,6 +64,17 @@ namespace Dissertation.Models.Persistence
 				                    .Where(g => g.UserGuid == user.UserGuid)
 				                    .ToListAsync();
         }
+
+		public static async Task<List<Workout>> GetAllWorkoutRecordsForTheLast30Days(SQLiteAsyncConnection _connection)
+        {
+            var users = await UsersCredentials.GetAllUsers(_connection);
+            var user = users[0];
+			var date = DateTime.Now.AddDays(-30);
+            return await _connection.Table<Models.Persistence.Workout>()
+				                    .Where(w => w.WorkoutDate > date)
+                                    .Where(g => g.UserGuid == user.UserGuid)
+                                    .ToListAsync();
+        }
     }
 }
 

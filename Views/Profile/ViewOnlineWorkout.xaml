@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Profile.ViewOnlineWorkout" Title="Workout">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.ViewOnlineWorkout" 
+             Title="Workout">
+    
     <ContentPage.Content>
-        <Grid BackgroundColor="#06a4cc" Grid.Row="0" RowSpacing="1" ColumnSpacing="1">
+        <Grid BackgroundColor="#06a4cc" 
+              Grid.Row="0" 
+              RowSpacing="1" 
+              ColumnSpacing="1">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.1*" />
             </Grid.RowDefinitions>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*" />
                 <ColumnDefinition Width="*" />
@@ -16,8 +25,9 @@
             <Editor x:Name="Editor" 
                     Grid.Row="1" 
                     Grid.Column="1"/>
-
-            
+                                
         </Grid>
+        
     </ContentPage.Content>
+    
 </ContentPage>

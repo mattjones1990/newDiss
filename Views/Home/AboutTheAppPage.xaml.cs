@@ -12,7 +12,7 @@ namespace Dissertation.Views.Home
             InitializeComponent();
         }
 
-        //Go back to homepage
+        //GO BACK TO HOMEPAGE
 		void Back_Click(object sender, System.EventArgs e)
         {
 			RedirectToHomePage();
@@ -23,8 +23,5 @@ namespace Dissertation.Views.Home
             await Navigation.PushAsync(new Views.Home.HomePage());
             return;
         }
-
-        //Maybe add some sort of questions based page, comment section etc.
-        //Use the users credentials to subit it to an audit table of some description on the DB???
     }
 }

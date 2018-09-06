@@ -17,7 +17,4 @@
             TextColor="#06a4cc">
     </Button>
 
-    <!--Add comment section and button to submit to database audit table. Enables
-    general queries about the app.-->
-    
 </ContentPage>

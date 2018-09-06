@@ -23,8 +23,8 @@ namespace Dissertation.Views.Login
             
         }       
 
-        //Login
-		void Handle_Clicked(object sender, System.EventArgs e)
+        //LOGIN
+		void Login(object sender, System.EventArgs e)
 		{
 			if (CheckFields(EmailField.Text, PasswordField.Text, HandleField.Text))
 			{
@@ -32,32 +32,32 @@ namespace Dissertation.Views.Login
 			}
 		}
         
-        //Register
-		void Handle_Clicked_1(object sender, System.EventArgs e)
+        //REGISTER
+		void Register(object sender, System.EventArgs e)
 		{
 			if (CheckFields(EmailField.Text, PasswordField.Text, HandleField.Text))
 			{
-				CheckLogin(EmailField.Text, PasswordField.Text, HandleField.Text, "CheckIfSqliteInAzureForDisclaimer");
+				CheckLogin(EmailField.Text, PasswordField.Text, HandleField.Text, "CheckDuplicates");
             }
 		}
 
 		public bool CheckFields(string email, string password, string handle)
 		{
 			bool x = false;
-			if (String.IsNullOrEmpty(email) || String.IsNullOrWhiteSpace(email) || !email.Contains("."))
+			if (String.IsNullOrEmpty(email) || String.IsNullOrWhiteSpace(email) || !email.Contains(".") || email == "@." || email.Length < 5)
 			{
 				EmailField.BackgroundColor = Color.LightGray;
 				DisplayAlert("Invalid Email Address", "You cannot register without a valid email address.", "Ok");
 			}
-			else if (String.IsNullOrEmpty(password) || password.Length < 8)
+			else if (String.IsNullOrEmpty(password) || password.Length < 8 || password.Contains(" "))
 			{
 				PasswordField.BackgroundColor = Color.LightGray;
-				DisplayAlert("Invalid Password", "Your password must be more than 7 characters long.", "Ok");
+				DisplayAlert("Invalid Password", "Your password must be more than 7 characters long and contain no white space.", "Ok");
 			}
-			else if (String.IsNullOrEmpty(handle) ||handle.Length < 5)
+			else if (String.IsNullOrEmpty(handle) ||handle.Length < 5 || handle.Contains(" "))
 			{
 				HandleField.BackgroundColor = Color.LightGray;
-				DisplayAlert("Invalid Handle", "Your handle must be more than 4 characters long.", "Ok");
+				DisplayAlert("Invalid Handle", "Your handle must be more than 4 characters long and contain no white space", "Ok");
 			}
 			else
 				x = true;
@@ -81,33 +81,16 @@ namespace Dissertation.Views.Login
                 }
             }
         }
-
-		//private async Task CreateBlankUserRecord()
-        //{
-        //    await _connection.ExecuteAsync("DELETE FROM UsersCredentials");
-        //    var newUser = new UsersCredentials
-        //    {
-        //        //Email = "mattjones1990@hotmail.co.uk",
-        //        //Handle = "mj0nes6",
-        //        //Password = "Aite123!"
-        //        Email = "",
-        //        Handle = "",
-        //        Password = ""
-        //    };
-
-        //    await _connection.InsertAsync(newUser);
-        //}
-
+               
 		public async Task CheckLogin(string email, string password, string handle, string reason) {
 			
-			//Check to see if the details exist in the database already
+
             string k = "FAF3C5A4-D949-E811-811F-0CC47A480E0C";
             LoginCheck login = new LoginCheck();
             login.Active = 1;
             login.Email = Models.Security.Encrypt(Models.Security.Encrypt(email, k), k);
             login.Password = Models.Security.Encrypt(Models.Security.Encrypt(password, k), k);
-			login.Handle = handle;//Models.Security.Encrypt(Models.Security.Encrypt(handle, k), k);
-            //login.UserGuid = new Guid("382F42CF-51A0-4658-A1D8-177FCB74AF98");//localUserInfo.UserGuid;
+			login.Handle = handle;
 			login.Reason = reason; //"CheckIfSqliteInAzure";
 
             string url = "https://myapi20180503015443.azurewebsites.net/api/Login/CheckUser";
@@ -117,7 +100,7 @@ namespace Dissertation.Views.Login
             var content = new StringContent(data, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(url, content);
             var result = JsonConvert.DeserializeObject<LoginCheck>(response.Content.ReadAsStringAsync().Result);
-            //If they match, go to home screen
+
 
 			if (reason == "CheckIfSqliteInAzure")
 			{
@@ -142,7 +125,7 @@ namespace Dissertation.Views.Login
 					return;
 				}
 			}
-			else if (reason == "CheckIfSqliteInAzureForDisclaimer")
+			else if (reason == "CheckDuplicates")
 			{
 				if (result.Worked == true)
 				{
@@ -195,21 +178,7 @@ namespace Dissertation.Views.Login
 					await DisplayAlert("Registration Failed", result.Reason, "Ok");
                     return;
 				}
-			}
-
-
-
-
-			//if (result.Worked == true)
-    //        {
-    //            await Navigation.PushAsync(new Views.Home.HomePage());
-    //        }
-    //        else
-    //        {
-    //            //await _connection.ExecuteAsync("DELETE FROM UsersCredentials");
-    //            //await CreateBlankUserRecord();
-				//await Navigation.PushAsync(new LoginPage());
-            //}
+			}          
 		}
 
     }

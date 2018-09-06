@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Workout.EditExercisePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Workout.EditExercisePage">
+    
     <ContentPage.Content>
+        
         <Grid BackgroundColor="#06a4cc">
+            
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="0.5*" />
@@ -13,6 +18,7 @@
             <RowDefinition Height="0.3*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+            
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*" />
             <ColumnDefinition Width="*" />
@@ -57,7 +63,7 @@
                     HorizontalOptions="FillAndExpand"
                     FontFamily="Boulder"/>
 
-            <Button Text="Update Exercise"
+        <Button Text="Update Exercise"
                 BackgroundColor="White"
                 Font="Medium"
                 Grid.Row="7" 

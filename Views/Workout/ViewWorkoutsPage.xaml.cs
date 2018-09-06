@@ -70,13 +70,15 @@ namespace Dissertation.Views.Workout
 					}
 				}
 
-				int muscleGroupLength = musclegroups.Length - 1;
+				int muscleGroupLength = musclegroups.Length - 1 ;
 				char muscleGroupLastChar = musclegroups[muscleGroupLength];
+				string muscleGroupFinal = "";
 				if (muscleGroupLastChar == '/')
 				{
-					musclegroups.Remove(muscleGroupLength, 1);
+					//musclegroups.Remove(muscleGroupLength, 1);
+					muscleGroupFinal = musclegroups.Remove(musclegroups.Length - 1);
 				}
-				workoutFromSqlite.MuscleGroups = musclegroups;
+				workoutFromSqlite.MuscleGroups = muscleGroupFinal;
 
 				ListOfWorkouts.Add(workoutFromSqlite);
 			}
@@ -107,7 +109,14 @@ namespace Dissertation.Views.Workout
 					if (online)
 					{
 						var submittedWorkouts = await Models.OnlineWorkoutFromPhone.PublishWorkoutOnline(_connection,item.Id);
-						await DisplayAlert("Success!", "Workout Published Online", "Ok");
+						if(submittedWorkouts.Reason == "Workout Already Submitted")
+						{
+							await DisplayAlert("Workout Failed to Upload!", "Workout previously published online.", "Ok"); 
+						}
+						else 
+						{
+							await DisplayAlert("Success!", "Workout published online.", "Ok");                     
+                        }
                     
 					}					
 					CompletedWorkout(item);					

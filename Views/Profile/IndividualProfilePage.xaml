@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Profile.IndividualProfilePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.IndividualProfilePage">
+    
     <ContentPage.Content>
-                <Grid BackgroundColor="#06a4cc" ColumnSpacing="1" RowSpacing="1">
+                <Grid BackgroundColor="#06a4cc" 
+                      ColumnSpacing="1" 
+                      RowSpacing="1">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.1*" />
                 <RowDefinition Height="0.7*" />
             </Grid.RowDefinitions>
-            <Grid BackgroundColor="#06a4cc" Grid.Row="0" RowSpacing="1" ColumnSpacing="1">
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="0" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*" />
                     <RowDefinition Height="*" />
@@ -20,6 +31,7 @@
                     <RowDefinition Height="0.9*" />
                     <RowDefinition Height="0.1*" />
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*" />
                     <ColumnDefinition Width="*" />
@@ -110,31 +122,97 @@
                         Grid.RowSpan="3"/>                                             
 
             </Grid>
-            <Grid BackgroundColor="White" Grid.Row="1" RowSpacing="1" ColumnSpacing="1">
-                <Label Text="Previous Workouts" FontFamily="Boulder" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" />
+            
+            <Grid BackgroundColor="White" 
+                  Grid.Row="1" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <Label Text="Previous Workouts" 
+                       FontFamily="Boulder" 
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center" 
+                       TextColor="Black" />
+                
             </Grid>
-            <Grid BackgroundColor="#06a4cc" Grid.Row="2" RowSpacing="1" ColumnSpacing="1">
-                <ListView x:Name="WorkoutList" HasUnevenRows="true" BackgroundColor="White" SeparatorColor="#06a4cc" SeparatorVisibility="None">
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="2" RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <ListView x:Name="WorkoutList" 
+                          HasUnevenRows="true" 
+                          BackgroundColor="White"
+                          SeparatorColor="#06a4cc" 
+                          SeparatorVisibility="None">
+                    
                     <ListView.ItemTemplate>  
+                        
                 <DataTemplate >  
+                            
                     <ViewCell>
+                                
                         <StackLayout>
-                            <StackLayout Orientation="Horizontal" Padding="5">
+                                    
+                            <StackLayout Orientation="Horizontal" 
+                                         Padding="5">
+                                        
                                 <StackLayout>
-                                    <Label Text="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}" FontSize="Small" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" />
-                                    <Label Text="{Binding Handle}" BindingContext="{Binding }" FontSize="Large" TextColor="#06a4cc" FontAttributes="Bold" FontFamily="Boulder"/>
+                                            
+                                    <Label Text="{Binding WorkoutDate, 
+                                            StringFormat='{0:dd-MMM-yy}'}" 
+                                           FontSize="Small" 
+                                           TextColor="Black" 
+                                           FontAttributes="Bold" 
+                                           FontFamily="Boulder" />
+                                            
+                                    <Label Text="{Binding Handle}" 
+                                           BindingContext="{Binding }" 
+                                           FontSize="Large" 
+                                           TextColor="#06a4cc" 
+                                           FontAttributes="Bold" 
+                                           FontFamily="Boulder"/>
+                                            
                                 </StackLayout>
-                                <Button HorizontalOptions="EndAndExpand" Text="View" FontSize="Large" TextColor="White" CommandParameter="{Binding }" FontFamily="Boulder" BorderColor="White" BackgroundColor="#06a4cc" BorderWidth="2" BorderRadius="5"
-                                    WidthRequest="100" Clicked="ViewWorkoutForUser" />
+                                        
+                                <Button HorizontalOptions="EndAndExpand" 
+                                        Text="View" 
+                                        FontSize="Large" 
+                                        TextColor="White" 
+                                        CommandParameter="{Binding }" 
+                                        FontFamily="Boulder" 
+                                        BorderColor="White" 
+                                        BackgroundColor="#06a4cc" 
+                                        BorderWidth="2" 
+                                        BorderRadius="5"
+                                        WidthRequest="100" 
+                                        Clicked="ViewWorkoutForUser" />
+                                        
                             </StackLayout>
-                            <Label Text="-------------" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#06a4cc" FontSize="Small" FontFamily="Boulder" />
+                                    
+                            <Label Text="-------------" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   TextColor="#06a4cc" 
+                                   FontSize="Small" 
+                                   FontFamily="Boulder" />
+                                    
                         </StackLayout>
+                                
                     </ViewCell>
+                            
                 </DataTemplate>  
+                        
             </ListView.ItemTemplate> 
+                    
                 </ListView>
+                
             </Grid>
+            
         </Grid>
+        
     </ContentPage.Content>
+    
 </ContentPage>
 

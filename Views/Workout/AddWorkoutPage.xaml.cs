@@ -57,6 +57,8 @@ namespace Dissertation.Views.Workout
 		{   //guid later
 			//Add workout record
 
+			await DisplayAlert("Disclaimer", "This application may create sets for you. Please only lift weights in a safe way, with a spotter if necessary.", "I Understand");
+
 			var users = await Models.Persistence.UsersCredentials.GetAllUsers(_connection);
 			var user = users[0]; //SHOULD NEVER BE A CASE WHERE THIS FAILS. MAYBE NEED TO ADD VALIDATION IN THE FUTURE
 

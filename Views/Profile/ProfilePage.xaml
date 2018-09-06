@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Profile.ProfilePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.ProfilePage">
+    
     <ContentPage.Content>
+        
         <Grid BackgroundColor="#06a4cc" 
               ColumnSpacing="1" 
               RowSpacing="1">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.1*" />
                 <RowDefinition Height="0.7*" />
             </Grid.RowDefinitions>
+            
             <Grid BackgroundColor="#06a4cc" 
                   Grid.Row="0" 
                   RowSpacing="1" 
                   ColumnSpacing="1">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*" />
                     <RowDefinition Height="*" />
@@ -25,6 +32,7 @@
                     <RowDefinition Height="0.9*" />
                     <RowDefinition Height="0.1*" />
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*" />
                     <ColumnDefinition Width="*" />
@@ -37,7 +45,6 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="0.1*" />
-
                 </Grid.ColumnDefinitions>
 
                 <Label  x:Name="HandleLabel"
@@ -68,7 +75,7 @@
                 <Label  x:Name="AgeLabel"
                         HorizontalTextAlignment="Start" 
                         VerticalTextAlignment="Start"
-                        Text="Age:" 
+                        Text="Age: " 
                         FontSize="Small" 
                         TextColor="White" 
                         FontFamily="Boulder"
@@ -100,15 +107,6 @@
                         Grid.Row="5" 
                         Grid.Column="1"
                         Grid.ColumnSpan="4"/>
-
-<!--                <Editor x:Name="BioEditor"
-                        Text="Fat ass chode fuck off\n\nNewLineDA DA DA DA DA DA DA "
-                        FontSize="Small"
-                        Grid.Row="5"
-                        Grid.Column="2"
-                        Grid.RowSpan="2"
-                        Grid.ColumnSpan="7"
-                        TextChanged="ChangeBioText"/>-->
 
                     <Label  x:Name="BioLabel2"
                         HorizontalTextAlignment="Start" 
@@ -189,31 +187,104 @@
                         Clicked="Profiles"/>
 
             </Grid>
-            <Grid BackgroundColor="White" Grid.Row="1" RowSpacing="1" ColumnSpacing="1">
-                <Label Text="Previous Workouts" FontFamily="Boulder" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" />
+            
+            <Grid BackgroundColor="White" 
+                  Grid.Row="1" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <Label Text="Previous Workouts" 
+                       FontFamily="Boulder" 
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center" 
+                       TextColor="Black" />
+                
             </Grid>
-            <Grid BackgroundColor="#06a4cc" Grid.Row="2" RowSpacing="1" ColumnSpacing="1">
-                <ListView x:Name="profileList" ItemTapped="ViewExercises" HasUnevenRows="true" BackgroundColor="White" SeparatorColor="#06a4cc" SeparatorVisibility="None">
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="2" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <ListView x:Name="profileList" 
+                          ItemTapped="ViewExercises" 
+                          HasUnevenRows="true" 
+                          BackgroundColor="White" 
+                          SeparatorColor="#06a4cc" 
+                          SeparatorVisibility="None">
+                    
                     <ListView.ItemTemplate>
+                        
                         <DataTemplate>
+                            
                             <ViewCell>
+                                
                                 <StackLayout>
-                                    <StackLayout Orientation="Horizontal" Padding="5">
+                                    
+                                    <StackLayout Orientation="Horizontal" 
+                                                 Padding="5">
+                                        
                                         <StackLayout>
-                                            <Label Text="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}" FontSize="Small" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" />
-                                            <Label Text="{Binding MuscleGroups, StringFormat='Muscle Group(s): {0}'}" FontSize="Small" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" />
-                                            <Label Text="{Binding Location, StringFormat='Location: {0}'}" FontSize="Small" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" />
+                                            
+                                            <Label Text="{Binding WorkoutDate, 
+                                                    StringFormat='{0:dd-MMM-yy}'}" 
+                                                   FontSize="Small" 
+                                                   TextColor="Black" 
+                                                   FontAttributes="Bold" 
+                                                   FontFamily="Boulder" />
+                                            
+                                            <Label Text="{Binding MuscleGroups,
+                                                    StringFormat='Muscle Group(s): {0}'}" 
+                                                   FontSize="Small" 
+                                                   TextColor="Black" 
+                                                   FontAttributes="Bold" 
+                                                   FontFamily="Boulder" />
+                                            
+                                            <Label Text="{Binding Location, 
+                                                    StringFormat='Location: {0}'}" 
+                                                   FontSize="Small" 
+                                                   TextColor="Black" 
+                                                   FontAttributes="Bold" 
+                                                   FontFamily="Boulder" />
+                                            
                                         </StackLayout>
-                                        <Button HorizontalOptions="EndAndExpand" Text="{Binding CompletedString}" CommandParameter="{Binding }" FontSize="Large" TextColor="White" FontFamily="Boulder" BorderColor="White" BackgroundColor="#06a4cc" BorderWidth="2" BorderRadius="5"
-                                            WidthRequest="100" />
+                                        
+                                        <Button HorizontalOptions="EndAndExpand" 
+                                                Text="{Binding CompletedString}" 
+                                                CommandParameter="{Binding }" 
+                                                FontSize="Large" 
+                                                TextColor="White" 
+                                                FontFamily="Boulder" 
+                                                BorderColor="White" 
+                                                BackgroundColor="#06a4cc" 
+                                                BorderWidth="2" 
+                                                BorderRadius="5"
+                                                WidthRequest="100" />
+                                        
                                     </StackLayout>
-                                    <Label Text="-------------" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#06a4cc" FontSize="Small" FontFamily="Boulder" />
+                                    
+                                    <Label Text="-------------" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           TextColor="#06a4cc" 
+                                           FontSize="Small" 
+                                           FontFamily="Boulder" />
+                                    
                                 </StackLayout>
+                                
                             </ViewCell>
+                            
                         </DataTemplate>
+                        
                     </ListView.ItemTemplate>
+                    
                 </ListView>
+                
             </Grid>
+            
         </Grid>
+        
     </ContentPage.Content>
+    
 </ContentPage>

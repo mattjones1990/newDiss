@@ -271,54 +271,25 @@ namespace Dissertation.Models
 			//var testing = await Models.Persistence.Exercise.GetAllExercise(_connection);
 			int exerciseId = exerciseRecords[0].Id;
 
-			List<int> setReps = new List<int>(new int[] {12,10,8,6,4});
+			List<int> setReps = new List<int>(new int[] { 12, 10, 8, 6, 4 });
 
 			foreach (var s in setReps)
 			{
 				//add set record
-
 				DateTime d = DateTime.Now;
 
-                var set = new Models.Persistence.Set
-                {
-                    ExerciseId = exerciseId,
-                    TimeOfSet = d,
-                    Weight = 0m,
-                    Reps = s
-                };
+				var set = new Models.Persistence.Set
+				{
+					ExerciseId = exerciseId,
+					TimeOfSet = d,
+					Weight = 0m,
+					Reps = s
+				};
 
-                await _connection.InsertAsync(set);
+				await _connection.InsertAsync(set);
 				Task.Delay(100).Wait();
-			}     
+			}
 		}
-
-		//public static async Task CreateEmptyExerciseSets(SQLiteAsyncConnection _connection, string exercise, Models.Persistence.Workout workout)
-        //{
-        //    DateTime date = await CreateExerciseRecordForWorkout(_connection, exercise, workout);
-        //    var exerciseRecords = await Models.Persistence.Exercise.GetAllExerciseRecordsByDate(_connection, date);
-        //    //var testing = await Models.Persistence.Exercise.GetAllExercise(_connection);
-        //    int exerciseId = exerciseRecords[0].Id;
-
-        //    List<int> setReps = new List<int>(new int[] { 12, 10, 8, 6, 4 });
-
-        //    foreach (var s in setReps)
-        //    {
-        //        //add set record
-
-        //        DateTime d = DateTime.Now;
-
-        //        var set = new Models.Persistence.Set
-        //        {
-        //            ExerciseId = exerciseId,
-        //            TimeOfSet = d,
-        //            Weight = 0m,
-        //            Reps = s
-        //        };
-
-        //        await _connection.InsertAsync(set);
-        //        Task.Delay(100).Wait();
-        //    }
-        //}
 
 		private static async Task<DateTime> CreateExerciseRecordForWorkout(SQLiteAsyncConnection _connection, string exercise, Persistence.Workout workout)
 		{
@@ -362,60 +333,3 @@ namespace Dissertation.Models
 		}
 	}
 }
-
-
-
-/*
-
-
-
-await _connection.InsertAsync(exercise);
-
-var exerciseCheck = await Exercise.GetAllExerciseRecordsByDate(_connection, now);
-
-WorkoutList workout = new WorkoutList()
-{
-    Id = WorkoutId
-};
-
-await Navigation.PushAsync(new Views.Workout.ViewExercisesPage(workout));
-            Navigation.RemovePage(this);
-
-
- * IF the exercise is a compound lift, enter this block
- *      Get the previous exercise records and sets for this lift
- *      IF Check if there has been a set of 12,10,8,6,4 completed in the last ten days
- *      -    If there has, get the 1RM based on the set of 4
- *      -        Calculate the new 12,10,8,6,4 based on this
- *      -
- *      ELSE IF Check if its been 20 days since the last workout.
- *          IF NOT then use the last set of 12,10,8,6,4.
- * 
- *      IF ITS BEEN 20 DAYS
- *          Ask for an estimate of the persons 1rm and calculate 12,10,8,6,4 from that.
- *      
- * 
- * 
- * 
- * 
- */
-
-
-//Add sets for that exercise
-
-//public void calculateWeight(List<int> set, string unitOfWeight, decimal incrementOfWeight, string exercise, decimal oneRepMax)
-//{
-//    Console.WriteLine("Workout");
-//    Console.WriteLine("---------------");
-//    Console.WriteLine("Exercise: " + exercise);
-//    Console.WriteLine("Unit of Weight: " + unitOfWeight);
-//    Console.WriteLine("---------------");
-//    int setNum = 1;
-
-//    for (int i = 4; i > -1; i--)
-//    {
-//        decimal weight = weightForSet(oneRepMax, set[i], incrementOfWeight);
-//        Console.WriteLine("Set: " + setNum + " Reps: " + set[i] + " - Weight: " + weight + unitOfWeight);
-//        setNum++;
-//    }
-//}

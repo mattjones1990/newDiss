@@ -15,7 +15,7 @@ namespace Dissertation.Views.Graveyard
 
 			string b = a.Replace("NEWLINE", "\n");
 
-			matt.Text = b;
+			//matt.Text = b;
         }
     }
 }

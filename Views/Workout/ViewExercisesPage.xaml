@@ -5,19 +5,29 @@
              Title="Exercises">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Add" Clicked="Handle_Clicked"></ToolbarItem>
+        
+        <ToolbarItem Name="Add" 
+                     Clicked="Handle_Clicked">        
+        </ToolbarItem>
+        
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
+        
         <ListView x:Name="ListViewExercises"
                   ItemTapped="Handle_ItemTapped"
                   BackgroundColor="White" 
                   SeparatorColor="#06a4cc" 
                   SeparatorVisibility="Default">
+            
             <ListView.ItemTemplate>  
+                
                 <DataTemplate>  
+                    
                     <ViewCell>
+                        
                         <ViewCell.ContextActions>
+                            
                             <MenuItem Text="Delete"
                                       Clicked="DeleteExercise"                                    
                                       IsDestructive="true"
@@ -32,9 +42,11 @@
                             
                         </ViewCell.ContextActions>
 
-                        <StackLayout>                                      
+                        <StackLayout>   
+                            
                         <StackLayout Orientation="Horizontal"
                                      Padding="15">
+                                
                         <StackLayout>
 
                             <Label Text="{Binding FrontEndExerciseString}"
@@ -42,9 +54,7 @@
                                    TextColor="Black" 
                                    FontAttributes="Bold" 
                                    FontFamily="Boulder"
-                                   HorizontalTextAlignment="Center"/>
-
-                           
+                                   HorizontalTextAlignment="Center"/>            
                             
                         </StackLayout>
                                 
@@ -61,8 +71,13 @@
                         </StackLayout>
                                                                                                                 
                     </ViewCell>
+                    
                 </DataTemplate>  
+                
             </ListView.ItemTemplate> 
+            
         </ListView>
+        
     </ContentPage.Content>
+    
 </ContentPage>

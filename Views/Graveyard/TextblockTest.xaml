@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Graveyard.TextblockTest">
     <ContentPage.Content>
-        <Editor x:Name="matt"
-                Text=""/>
-              
+        <ContentView Padding="5">
+            <Frame OutlineColor="Accent" Padding="10">
+                <StackLayout Orientation="Horizontal">
+                    <BoxView x:Name="boxView" Color="{Binding Color}" WidthRequest="50" HeightRequest="50" />
+                    <StackLayout>
+                        <Label Text="{Binding FriendlyName}" FontSize="22" VerticalOptions="StartAndExpand" />
+                        <Label Text="{Binding RgbDisplay, StringFormat='RGB = {0}'}" FontSize="16" VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </ContentView>
     </ContentPage.Content>
 </ContentPage>

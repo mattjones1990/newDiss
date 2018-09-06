@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Dissertation.Views.Workout.ViewWorkoutsPage"
-             Title="Workouts"
-             >
+             Title="Workouts">
+    
     <ContentPage.Content>
+        
         <ListView x:Name="workoutList"
                   ItemTapped="ViewExercises"
                   HasUnevenRows="true"
@@ -13,9 +14,13 @@
                   SeparatorVisibility="None">
             
             <ListView.ItemTemplate>  
+                
                 <DataTemplate >  
+                    
                     <ViewCell>
+                        
                         <ViewCell.ContextActions>
+                            
                             <MenuItem Text="Delete"
                                       Clicked="DeleteWorkout"                                    
                                       IsDestructive="true"
@@ -27,25 +32,27 @@
                                       IsDestructive="false"
                                       CommandParameter="{Binding .}">                              
                             </MenuItem>
+                            
                         </ViewCell.ContextActions>
 
                         <StackLayout>
-                            
-                        
+                             
                         <StackLayout Orientation="Horizontal"
                                      Padding="5">
-                            <StackLayout>
+                        <StackLayout>
 
                             <Label Text="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}"
                                    FontSize="Small" 
                                    TextColor="Black" 
                                    FontAttributes="Bold" 
                                    FontFamily="Boulder"/>
+                                    
                             <Label Text="{Binding MuscleGroups, StringFormat='Muscle Group(s): {0}'}"
                                    FontSize="Small" 
                                    TextColor="Black" 
                                    FontAttributes="Bold" 
                                    FontFamily="Boulder"/>
+                                    
                             <Label Text="{Binding Location, StringFormat='Location: {0}'}"
                                    FontSize="Small" 
                                    TextColor="Black" 
@@ -53,6 +60,7 @@
                                    FontFamily="Boulder"/>
                                                       
                             </StackLayout>
+                                
                             <Button                                 
                                 HorizontalOptions="EndAndExpand"
                                 Text="{Binding CompletedString}"
@@ -66,7 +74,9 @@
                                 BorderRadius="5"
                                 WidthRequest="100"
                                 Clicked="CompleteWorkout"/>
+                                
                         </StackLayout>
+                            
                             <Label Text="-------------" 
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
@@ -74,46 +84,15 @@
                                    FontSize="Small"
                                    FontFamily="Boulder"/> 
                         </StackLayout>
+                        
                     </ViewCell>
+                    
                 </DataTemplate>  
+                
             </ListView.ItemTemplate> 
+            
         </ListView>
+        
     </ContentPage.Content>
+    
 </ContentPage>
-
-
-
-
-                        <!--<StackLayout Orientation="Horizontal"                                     
-                                     Padding="3">
-                            
-                            <Label Text ="{Binding WorkoutDate, StringFormat='{0:dd-MMM-yy}'}" 
-                                   FontSize="Small" TextColor="#06a4cc" FontAttributes="Bold" FontFamily="Boulder"/>
-                            
-                            <StackLayout HorizontalOptions="Start">
-                                
-                                <Label Text="{Binding Location, StringFormat='Location: {0}'}"  
-                                       FontSize="Small" 
-                                       TextColor="#06a4cc" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="Boulder"/>
-                                <Label Text="{Binding MuscleGroups, StringFormat='Muscle Group(s): {0}'}" 
-                                       FontSize="Small" 
-                                       TextColor="#06a4cc" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="Boulder"/>
-                                
-                            </StackLayout>
-                            <Button 
-                                HorizontalOptions="EndAndExpand"
-                                Text="{Binding CompletedString}"  
-                                FontSize="Micro"
-                                TextColor="{Binding CompletedColor}"
-                                FontFamily="Boulder"
-                                BorderColor="#06a4cc"
-                                BorderWidth="2"
-                                BorderRadius="5"
-                                WidthRequest="100"
-                                />
-                            
-                        </StackLayout>-->

@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Dissertation.Views.Workout.AddSetPage">
+    
     <ContentPage.Content>
+        
         <Grid BackgroundColor="#06a4cc">
+            
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="0.5*" />
@@ -16,6 +19,7 @@
             <RowDefinition Height="0.3*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+            
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*" />
             <ColumnDefinition Width="*" />
@@ -100,5 +104,7 @@
                FontAttributes="Bold"
                TextColor="White"/>
     </Grid>
+        
     </ContentPage.Content>
+    
 </ContentPage>

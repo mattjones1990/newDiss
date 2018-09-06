@@ -5,7 +5,9 @@
              Title="Search Profiles">
     
     <ContentPage.Content>
-        <Grid BackgroundColor="#06a4cc" ColumnSpacing="1" RowSpacing="1">
+        <Grid BackgroundColor="#06a4cc" 
+              ColumnSpacing="1" 
+              RowSpacing="1">
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -62,7 +64,9 @@
                           ItemTapped="SelectedUserHandle">
                     
                     <ListView.ItemTemplate>
+                        
                         <DataTemplate>
+                            
                             <ViewCell>
                                 
                                 <Frame Padding="5" 
@@ -80,10 +84,17 @@
                                 </Frame>
 
                             </ViewCell>
+                            
                         </DataTemplate>
+                        
                     </ListView.ItemTemplate>
+                    
                 </ListView>
+                
             </Grid>
+            
         </Grid>
+        
     </ContentPage.Content>
+    
 </ContentPage>

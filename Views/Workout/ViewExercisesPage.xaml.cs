@@ -60,7 +60,7 @@ namespace Dissertation.Views.Workout
 				exerciseFromSqLite.Exercise = exerciseName[0].ExerciseNameString;
 				exerciseFromSqLite.MuscleGroup = exerciseName[0].ExerciseMuscleGroup;
 				exerciseFromSqLite.Sets = sets.Count.ToString();
-				exerciseFromSqLite.FrontEndExerciseString = exerciseNumber.ToString() + ") " + exerciseName[0].ExerciseNameString;
+				exerciseFromSqLite.FrontEndExerciseString = exerciseNumber.ToString() + "- " + exerciseName[0].ExerciseNameString;
 
 				ListOfExercises.Add(exerciseFromSqLite);
 

@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Dissertation.Views.Profile.LeaderBoardPage" Title="Leaderboard">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Dissertation.Views.Profile.LeaderBoardPage" 
+             Title="Leaderboard">
+    
     <ContentPage.Content>
-        <Grid BackgroundColor="#06a4cc" ColumnSpacing="1" RowSpacing="1">
+        
+        <Grid BackgroundColor="#06a4cc" 
+              ColumnSpacing="1" 
+              RowSpacing="1">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-            <Grid BackgroundColor="#06a4cc" Grid.Row="0" RowSpacing="1" ColumnSpacing="1">
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="0" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -14,22 +27,14 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-<!--                <Label Text="Search:" Grid.Row="1" 
-                       Grid.Column="0" 
-                       TextColor="White" 
-                       FontFamily="Boulder" 
-                       FontSize="Small" 
-                       FontAttributes="Bold" 
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center" />-->
 
-                                <Button x:Name="WorkoutsButton"
-        
+                <Button x:Name="WorkoutsButton"
                         Text="Search" 
                         FontSize="Default" 
                         TextColor="White" 
@@ -38,50 +43,135 @@
                         BackgroundColor="#06a4cc" 
                         BorderWidth="2" 
                         BorderRadius="5" 
-                        HorizontalOptions="Start" VerticalOptions="Start" 
-                        Grid.Row="1" 
+                        HorizontalOptions="Center" VerticalOptions="Start" 
+                        Grid.Row="2" 
                         Grid.Column="0"
+                        WidthRequest="100"
                         Clicked="Handle_Clicked"/>
-                
-                <Entry x:Name="HandleEntry" FontFamily="Boulder" Placeholder="Handle" Grid.Row="1" Grid.Column="1" 
-                       Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Start" 
+
+                <Entry x:Name="HandleEntry" 
+                       FontFamily="Boulder" 
+                       Placeholder="Handle" 
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Grid.ColumnSpan="2" 
+                       HorizontalOptions="Start" 
+                       VerticalOptions="Start" 
                        WidthRequest="230" />
-                <Picker x:Name="ExercisePicker" Title="Select Exercise" FontFamily="Boulder" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="2" Grid.Column="1" WidthRequest="230" Grid.ColumnSpan="2"
-                    >
+                
+                <Picker x:Name="ExercisePicker" 
+                        Title="Select Exercise" 
+                        FontFamily="Boulder" 
+                        FontSize="Medium" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Start" 
+                        Grid.Row="2" 
+                        Grid.Column="1" 
+                        WidthRequest="230" 
+                        Grid.ColumnSpan="2">
                     <Picker.Items>
                     </Picker.Items>
                 </Picker>
-                <Picker x:Name="Reps" Title="Reps" FontFamily="Boulder" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="230" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
-                    >
+                
+                <Picker x:Name="Reps" 
+                        Title="Reps" 
+                        FontFamily="Boulder" 
+                        FontSize="Medium" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Start" 
+                        WidthRequest="230" 
+                        Grid.Row="3" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
                     <Picker.Items>
                     </Picker.Items>
                 </Picker>
+                
             </Grid>
-            <Grid BackgroundColor="#06a4cc" Grid.Row="1" RowSpacing="1" ColumnSpacing="1">
-                <ListView x:Name="ListOfRecords" HasUnevenRows="true" BackgroundColor="White" SeparatorColor="#06a4cc" SeparatorVisibility="None" ItemTapped="SelectedProfile">
+            
+            <Grid BackgroundColor="#06a4cc" 
+                  Grid.Row="1" 
+                  RowSpacing="1" 
+                  ColumnSpacing="1">
+                
+                <ListView x:Name="ListOfRecords" 
+                          HasUnevenRows="true" 
+                          BackgroundColor="White" 
+                          SeparatorColor="#06a4cc" 
+                          SeparatorVisibility="None"
+                          ItemTapped="SelectedProfile">
+                    
                     <ListView.ItemTemplate>
+                        
                         <DataTemplate>
+                            
                             <ViewCell>
+                                
                                 <StackLayout>
-                                    <StackLayout Orientation="Horizontal" Padding="5">
+                                    
+                                    <StackLayout Orientation="Horizontal" 
+                                                 Padding="5">
+
                                         <StackLayout>
-                                            <Label Text="{Binding SetPosition,StringFormat='({0})'}" FontSize="Large" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" HorizontalTextAlignment="Center" />
-                                            <Label Text="{Binding Handle}" FontSize="Large" TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" HorizontalTextAlignment="End" VerticalTextAlignment="Start" />
+                                            <Label Text="{Binding SetPosition,
+                                                    StringFormat='{0}'}" 
+                                                   FontSize="Medium" 
+                                                   TextColor="Black" 
+                                                   FontAttributes="Bold" 
+                                                   FontFamily="Boulder" 
+                                                   HorizontalTextAlignment="Center" />
+                                            
+                                            <Label Text="{Binding Handle}" 
+                                                   FontSize="Large" 
+                                                   TextColor="Black" 
+                                                   FontAttributes="Bold" 
+                                                   FontFamily="Boulder" 
+                                                   HorizontalTextAlignment="Center" 
+                                                   VerticalTextAlignment="Center" />
+                                            
                                         </StackLayout>
-                                        <Label Text="{Binding Weight, StringFormat='{0}kg'}" FontSize="Medium" 
-                                               TextColor="Black" FontAttributes="Bold" 
-                                               FontFamily="Boulder" HorizontalOptions="Center" VerticalOptions="Center" />
-                                        <Label Text="{Binding Reps, StringFormat='Reps: {0}'}" 
-                                               FontSize="Medium" HorizontalOptions="EndAndExpand" 
-                                               TextColor="Black" FontAttributes="Bold" FontFamily="Boulder" />
+                                        
+                                        <Label Text="{Binding Weight, 
+                                                StringFormat='{0}kg'}" 
+                                               FontSize="Medium" 
+                                               TextColor="Black" 
+                                               FontAttributes="Bold" 
+                                               FontFamily="Boulder" 
+                                               HorizontalOptions="EndAndExpand" 
+                                               VerticalOptions="Center" />
+                                        
+                                        <Label Text="{Binding Reps, 
+                                                StringFormat='Reps: {0}'}" 
+                                               FontSize="Medium" 
+                                               HorizontalOptions="EndAndExpand"
+                                               VerticalOptions="Center"
+                                               TextColor="Black" 
+                                               FontAttributes="Bold" 
+                                               FontFamily="Boulder" />
+                                        
                                     </StackLayout>
-                                    <Label Text="-------------" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#06a4cc" FontSize="Small" FontFamily="Boulder" />
+                                    
+                                    <Label Text="-------------" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           TextColor="#06a4cc" 
+                                           FontSize="Small" 
+                                           FontFamily="Boulder" />
+                                    
                                 </StackLayout>
+                                
                             </ViewCell>
+                            
                         </DataTemplate>
+                        
                     </ListView.ItemTemplate>
+                    
                 </ListView>
+                
             </Grid>
+            
         </Grid>
+        
     </ContentPage.Content>
+    
 </ContentPage>
