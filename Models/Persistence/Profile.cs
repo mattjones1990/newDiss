@@ -27,7 +27,7 @@ namespace Dissertation.Models.Persistence
 			//USUAL JSON STUFF HERE
             //NEED TO ADD USERGUID TO THE WEB SERVICE SIDE OF THINGS
 
-            string url = "https://myapi20180503015443.azurewebsites.net/api/OnlineProfile/UpdateProfile";
+            string url = "https://myapixxxxxxxxxxxxxxxx.azurewebsites.net/api/OnlineProfile/UpdateProfile";
             HttpClient client = new HttpClient();
             var data = JsonConvert.SerializeObject(profile);
             var content = new StringContent(data, Encoding.UTF8, "application/json");
